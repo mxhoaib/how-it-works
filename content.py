@@ -252,7 +252,8 @@ MODES = {
 }
 
 import os
-from content_tech import TECH, TECH_MODES
+from content_tech import TECH, TECH_MODES, EV
 _only = [x for x in os.environ.get("HIW_TECH", "").split(",") if x]
 MODELS += [m for m in TECH if not _only or m["slug"] in _only]
+if os.environ.get("HIW_EV", "1") == "1": MODELS.append(EV)
 MODES.update(TECH_MODES)

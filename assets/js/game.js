@@ -166,9 +166,9 @@ function assemble(api, challenge) {
 function quiz(api, challenge) {
   const S = session(api, 'quiz', { ex: api.mdl.quizEx ?? .32 }), D = api.D;
   // only ask for parts you can actually tap from the starting view (small inner parts can hide behind others)
-  api.mdl.root.updateMatrixWorld(true); const c = api.canvas.getBoundingClientRect(), seen = new Set();
-  for (let gx = 0; gx < 30; gx++) for (let gy = 0; gy < 22; gy++) { const x = c.left + c.width * (gx + .5) / 30, y = c.top + 150 + (c.height - 210) * (gy + .5) / 22, h = api.pick({ clientX: x, clientY: y }); if (h) seen.add(h.id); }
-  let pool = api.prep.list.filter(p => p.obj.visible && seen.has(p.id)).map(p => p.id); if (pool.length < 4) pool = api.prep.list.filter(p => p.obj.visible).map(p => p.id);
+  api.mdl.root.updateMatrixWorld(true); const c = api.canvas.getBoundingClientRect(), seen = new Map();
+  for (let gx = 0; gx < 30; gx++) for (let gy = 0; gy < 22; gy++) { const x = c.left + 16 + (c.width - 32) * (gx + .5) / 30, y = c.top + 150 + (c.height - 210) * (gy + .5) / 22, h = api.pick({ clientX: x, clientY: y }); if (h) seen.set(h.id, (seen.get(h.id) || 0) + 1); }
+  let pool = api.prep.list.filter(p => p.obj.visible && seen.get(p.id) >= 3).map(p => p.id); if (pool.length < 4) pool = api.prep.list.filter(p => p.obj.visible).map(p => p.id);
   const ids = shuffle(pool).slice(0, Math.min(8, pool.length));
   let i = 0, first = true, score = 0, down = null;
   const ask = () => (api.quizTarget = ids[i], S.prompt(`Tap the ${D.parts[ids[i]].name.toLowerCase()}`, `Round ${i + 1} of ${ids.length} · wrong taps add 3 s`));

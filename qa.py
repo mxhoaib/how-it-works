@@ -94,7 +94,7 @@ async def model_page(b, m, w, h, mobile):
     tgt = await pg.evaluate("window.__hiw.quizTarget")
     # find a pixel on the target: sample around its centre until pick() returns it
     xy = await pg.evaluate("""id => { const a = window.__hiw, p = a.prep.byId[id], c = a.canvas.getBoundingClientRect(), b = new a.THREE.Box3().setFromObject(p.obj);
-      for (let i = 0; i < 400; i++) { const v = new a.THREE.Vector3(b.min.x + Math.random() * (b.max.x - b.min.x), b.min.y + Math.random() * (b.max.y - b.min.y), b.min.z + Math.random() * (b.max.z - b.min.z)); const q = v.clone().project(a.camera);
+      for (let i = 0; i < 1500; i++) { const v = new a.THREE.Vector3(b.min.x + Math.random() * (b.max.x - b.min.x), b.min.y + Math.random() * (b.max.y - b.min.y), b.min.z + Math.random() * (b.max.z - b.min.z)); const q = v.clone().project(a.camera);
         const x = c.left + (q.x + 1) / 2 * c.width, y = c.top + (1 - q.y) / 2 * c.height; if (y < 140 || y > c.bottom - 40 || x < 10 || x > c.right - 10) continue; const h = a.pick({clientX: x, clientY: y}); if (h && h.id === id) return [x, y]; } return null; }""", tgt)
     if xy:
         if mobile: await pg.touchscreen.tap(*xy)
@@ -184,8 +184,8 @@ async def home(b, w, h, mobile):
     ok(f"{tag} no horizontal overflow", await pg.evaluate("document.documentElement.scrollWidth <= innerWidth"))
     await pg.evaluate("window.scrollTo(0, innerHeight * .45)"); await pg.wait_for_timeout(900); await pg.screenshot(path=f"{SHOTS}home-{w}-explode.png")
     await pg.evaluate("document.querySelector('#models').scrollIntoView()"); await pg.wait_for_timeout(1200); await pg.screenshot(path=f"{SHOTS}home-{w}-gallery.png")
-    await pg.click(".filters [data-f=Vehicles]"); n = await pg.evaluate("[...document.querySelectorAll('.card3')].filter(c => !c.hidden).length"); ok(f"{tag} category filter", n == 2, f"{n} vehicle cards")
-    await pg.click(".filters [data-f=Tech]"); n = await pg.evaluate("[...document.querySelectorAll('.card3')].filter(c => !c.hidden).length"); ok(f"{tag} Tech filter", n == 9, f"{n} tech cards")
+    await pg.click(".filters [data-f=Vehicles]"); n = await pg.evaluate("[...document.querySelectorAll('.card3')].filter(c => !c.hidden).length"); nv = sum(1 for m in MODELS if m["tag"] == "Vehicles"); ok(f"{tag} category filter", n == nv, f"{n}/{nv} vehicle cards")
+    await pg.click(".filters [data-f=Tech]"); n = await pg.evaluate("[...document.querySelectorAll('.card3')].filter(c => !c.hidden).length"); nt = sum(1 for m in MODELS if m["tag"] == "Tech"); ok(f"{tag} Tech filter", n == nt == 9, f"{n}/{nt} tech cards")
     await pg.click(".filters [data-f=all]")
     imgs = await pg.evaluate("Promise.all([...document.images].map(i => (i.loading = 'eager', i.decode().then(() => i.naturalWidth > 0, () => false))))")
     ok(f"{tag} all images load", all(imgs), f"{sum(imgs)}/{len(imgs)}")
