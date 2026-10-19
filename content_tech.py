@@ -1,7 +1,7 @@
 # Tech category. Part lists are my own: each model's parts are generic, procedural and unbranded.
 TECH = [
 dict(slug="wireless-earbuds", name="Wireless earbuds", short="Earbuds", accent="#0a84ff", tag="Tech",
- title="How Wireless Earbuds Work: Interactive 3D Teardown (Inside AirPods-Style Buds)",
+ title="How Wireless Earbuds Work: Interactive 3D Teardown",
  desc="See how wireless earbuds work in 3D: driver, battery, microphones, antenna and charging case. Explode them, slice them and learn how noise cancelling works.",
  card="Driver, battery, mics and case, opened up.",
  lede="A speaker, a radio, a computer and a battery, squeezed into something smaller than a grape. Open one up, layer by layer.",
@@ -21,7 +21,7 @@ dict(slug="wireless-earbuds", name="Wireless earbuds", short="Earbuds", accent="
  facts=[("Harald","Bluetooth is named after Harald \"Bluetooth\" Gormsson, a 10th-century Danish king."),("2.4 GHz","Earbuds talk to your phone in the same radio band as Wi-Fi."),("Anti-noise","Noise cancelling adds an inverted copy of outside sound so the waves cancel.")],
  related=["smartphone","smartwatch","keyboard-switch"], play=["peel"],
  article=[
- ("How wireless earbuds work", ["Wireless earbuds, like AirPods-style buds, look simple from the outside, but each one is a complete audio system. Inside the shell there is a speaker driver, a rechargeable battery, several microphones, a Bluetooth radio and a small computer that ties them together. Your phone sends compressed audio over Bluetooth. The earbud's chip decodes it, applies any equalisation or noise cancelling, and drives the speaker.",
+ ("How wireless earbuds work", ["Wireless earbuds look simple from the outside, but each one is a complete audio system. Inside the shell there is a speaker driver, a rechargeable battery, several microphones, a Bluetooth radio and a small computer that ties them together. Your phone sends compressed audio over Bluetooth. The earbud's chip decodes it, applies any equalisation or noise cancelling, and drives the speaker.",
   "The speaker, called a driver, works like a full-size loudspeaker. A coil of very fine wire is attached to a thin diaphragm and sits in the field of a small permanent magnet. When the audio signal flows through the coil it becomes an electromagnet, pushed and pulled by the fixed magnet, so the diaphragm moves back and forth and pushes the air in your ear canal. The silicone tip seals the canal, which is why a good fit sounds so much fuller in the bass."]),
  ("Noise cancelling and microphones", ["Active noise cancelling uses microphones on the outside of the bud to listen to the sound around you. The processor creates a copy of that sound that is inverted, so its peaks line up with the troughs of the original. When both reach your ear they cancel each other out through destructive interference. A second microphone inside the bud checks what is left and corrects the result. It works best on steady, low sounds like engine hum.",
   "The same microphones handle calls. They are spaced apart so the processor can compare their signals and focus on sound coming from your mouth. Transparency mode does the opposite of noise cancelling, feeding outside sound through so you can hear traffic or a conversation."]),
@@ -29,7 +29,7 @@ dict(slug="wireless-earbuds", name="Wireless earbuds", short="Earbuds", accent="
   "The charging case is really a power bank. Magnets pull each bud into place so two metal contacts on the stem touch spring-loaded pins, and the case's larger battery tops the buds up. This model is a generic illustration, not any particular brand. Use Explode to separate the parts, or open Play to remove each layer in turn."]),
  ]),
 dict(slug="smartphone", name="Smartphone", short="Phone", accent="#0a84ff", tag="Tech",
- title="What's Inside a Smartphone: Interactive 3D Teardown (Inside an iPhone-Style Phone)",
+ title="What's Inside a Smartphone: Interactive 3D Teardown",
  desc="Open a smartphone in 3D: display, battery, logic board, cameras, seals and wireless charging coil. Peel it layer by layer and see how water resistance works.",
  card="Glass, battery, logic board and seals.",
  lede="A slab of glass and metal hiding a battery, a computer, a camera system and a radio for every band. Peel it apart one layer at a time.",
@@ -51,7 +51,7 @@ dict(slug="smartphone", name="Smartphone", short="Phone", accent="#0a84ff", tag=
  facts=[("IP68","6 = dust-tight, 8 = protected against continuous immersion in water."),("2019","The lithium-ion battery won the Nobel Prize in Chemistry."),("Ion exchange","Swapping sodium ions for larger potassium ions toughens the glass.")],
  related=["smartwatch","wireless-earbuds","processor-die"], play=["water","peel"],
  article=[
- ("Inside a smartphone", ["Open up a modern phone, such as an iPhone-style handset, and most of the space is battery. The rest is a carefully layered sandwich. At the front is the cover glass with its touch sensor. Below it is the display, then the frame, which holds the logic board, cameras, speakers and haptic motor. At the back are the wireless charging coil and the back glass. This model is generic and unbranded, but the layout is typical.",
+ ("Inside a smartphone", ["Open up a modern phone and most of the space is battery. The rest is a carefully layered sandwich. At the front is the cover glass with its touch sensor. Below it is the display, then the frame, which holds the logic board, cameras, speakers and haptic motor. At the back are the wireless charging coil and the back glass. This model is generic and unbranded, but the layout is typical.",
   "The logic board is the phone's computer. To save space, many phones stack two boards on top of each other, with the processor, memory, storage and modems spread across both. The main chip combines the CPU, the graphics processor and dedicated circuits for photos and machine learning on one piece of silicon. Thin flex cables join it to the display, cameras and buttons."]),
  ("Glass, display and touch", ["The cover glass gets its strength from chemistry. The finished glass is soaked in a bath of molten potassium salt, and larger potassium ions swap places with smaller sodium ions near the surface. They squeeze into the surface, putting it into compression, so a crack has to overcome that squeeze before it can grow. A grid of transparent electrodes under the glass senses the small change in capacitance when your finger comes close.",
   "Most flagship phones use OLED displays, where each pixel is a tiny light-emitting diode that makes its own light. That is why the blacks look truly black: those pixels are simply off. The display connects to the board through a folded flex cable."]),
@@ -59,7 +59,7 @@ dict(slug="smartphone", name="Smartphone", short="Phone", accent="#0a84ff", tag=
   "The battery is a lithium-ion pouch cell, the technology that earned John Goodenough, Stanley Whittingham and Akira Yoshino the 2019 Nobel Prize in Chemistry. Wireless charging works by magnetic induction: a coil in the charger makes a changing magnetic field, and the coil in the phone turns it back into current. That's why the back is glass rather than metal. Open the layers one by one in Play to see the order a repair technician would follow."]),
  ]),
 dict(slug="smartwatch", name="Smartwatch", short="Watch", accent="#ff9f0a", tag="Tech",
- title="How a Smartwatch Works: Interactive 3D Teardown (Inside an Apple Watch-Style Watch)",
+ title="How a Smartwatch Works: Interactive 3D Teardown",
  desc="Explore a smartwatch in 3D: display, battery, heart-rate sensors, crown, haptics and band. Peel it apart and learn how green LEDs measure your pulse.",
  card="Heart sensor, battery and crown, inside.",
  lede="A phone's worth of ideas in a case about 4 cm across: a display, a battery, a radio and sensors that read your pulse through your skin.",
@@ -79,7 +79,7 @@ dict(slug="smartwatch", name="Smartwatch", short="Watch", accent="#ff9f0a", tag=
  facts=[("Green light","Blood absorbs green light, so pulses of blood show up as dips in reflected light."),("PPG","Optical heart sensing is called photoplethysmography."),("Mohs 9","Sapphire crystal is second only to diamond for hardness.")],
  related=["smartphone","wireless-earbuds","cat-anatomy"], play=["peel"],
  article=[
- ("How a smartwatch works", ["A smartwatch, like an Apple Watch-style device, packs a small computer, a display, radios and a set of health sensors into a sealed case on your wrist. The layout is a stack. The crystal and display are on top, then the electronics and battery, and the sensor window sits on the back against your skin. The crown and side button poke through the case wall with seals around their shafts. This model is generic and unbranded.",
+ ("How a smartwatch works", ["A smartwatch packs a small computer, a display, radios and a set of health sensors into a sealed case on your wrist. The layout is a stack. The crystal and display are on top, then the electronics and battery, and the sensor window sits on the back against your skin. The crown and side button poke through the case wall with seals around their shafts. This model is generic and unbranded.",
   "Everything is designed around a tiny battery. The display can drop to a very low refresh rate, the processor sleeps between tasks, and sensors take readings in short bursts rather than all the time. That is how a watch can last a day or more on a battery that holds a small fraction of a phone's energy."]),
  ("Reading your heartbeat with light", ["The green lights on the back are the heart-rate sensor. The method is called photoplethysmography, or PPG. Blood is red because it reflects red light and absorbs green light. Each time your heart beats, a pulse of blood swells the tiny vessels in your wrist, so a little more green light is absorbed and a little less comes back to the photodiodes. Counting those dips gives your pulse.",
   "Movement creates noise in the signal, so the watch also uses its accelerometer to tell a heartbeat from the jolt of a footstep. Many watches add infrared light for overnight readings and electrodes for other measurements, but the basic idea stays the same: measure light, find the rhythm."]),
@@ -87,7 +87,7 @@ dict(slug="smartwatch", name="Smartwatch", short="Watch", accent="#ff9f0a", tag=
   "The band slides into rails cut into the case. It matters more than it looks: a band that is too loose lets light leak in around the sensor and makes heart readings less reliable. Explode the model to see every part, or open Play to remove the layers in the order a repair would follow."]),
  ]),
 dict(slug="laptop", name="Laptop", short="Laptop", accent="#bf5af2", tag="Tech",
- title="What's Inside a Laptop: Interactive 3D Teardown (Inside a MacBook-Style Laptop)",
+ title="What's Inside a Laptop: Interactive 3D Teardown",
  desc="Take a laptop apart in 3D: battery cells, logic board, processor, heat pipe and fan, keyboard, trackpad, hinge and display. Open the lid and peel each layer.",
  card="Battery, board, cooling and hinge.",
  lede="Under the keyboard sits a whole computer, a battery that fills half the case and a cooling system thinner than a pencil. Open the lid and look inside.",
@@ -110,7 +110,7 @@ dict(slug="laptop", name="Laptop", short="Laptop", accent="#bf5af2", tag="Tech",
  facts=[("Heat pipe","Boiling and condensing a liquid moves heat far better than solid copper."),("Half","Battery cells take up about half the space inside a thin laptop."),("Friction","The hinge uses friction to hold the screen at any angle.")],
  related=["cpu","ssd","keyboard-switch"], play=["hinge","peel"],
  article=[
- ("What's inside a laptop", ["A modern thin laptop, such as a MacBook-style notebook, is mostly battery. Flat lithium-ion cells fill the bottom of the case, and the logic board, processor and cooling system are squeezed into a strip near the hinge. On top sits the top case with the keyboard and trackpad, and the display lives in the lid. The model here is generic and unbranded, but the layout is common across thin laptops.",
+ ("What's inside a laptop", ["A modern thin laptop is mostly battery. Flat lithium-ion cells fill the bottom of the case, and the logic board, processor and cooling system are squeezed into a strip near the hinge. On top sits the top case with the keyboard and trackpad, and the display lives in the lid. The model here is generic and unbranded, but the layout is common across thin laptops.",
   "The logic board joins everything together. The processor sits in the middle, with memory either on the same package or beside it on the board. Storage is soldered flash memory or a removable SSD. Ports, speakers and the keyboard all connect to the board with flat flex cables."]),
  ("Keeping it cool", ["The processor turns electrical power into heat, and it has to lose that heat to keep running fast. A copper heat pipe is pressed against the chip. Inside the sealed pipe a small amount of liquid soaks a wick. At the hot end the liquid boils, the vapour rushes to the cooler end and condenses, and the liquid creeps back through the wick. This cycle moves heat far better than a solid copper bar of the same size.",
   "At the far end of the pipe are thin metal fins and a blower fan that pushes air through them and out of the vents. Some very thin laptops have no fan at all and spread the heat into the case instead. They stay silent but slow down sooner under heavy work."]),
@@ -253,7 +253,7 @@ dict(slug="keyboard-switch", name="Keyboard switch", short="Switch", accent="#ff
  ]),
 ]
 
-EV = dict(slug="ev-anatomy", name="Electric car anatomy", short="EV", accent="#30d158", tag="Vehicles",
+EV = dict(slug="ev-anatomy", disclaimer="Fan-made educational model, not affiliated with or endorsed by Tesla, Inc. or any brand mentioned.", name="Electric car anatomy", short="EV", accent="#30d158", tag="Vehicles",
  title="How an Electric Car Works: Interactive 3D EV Anatomy and Battery Pack",
  desc="See how an electric car works in 3D: battery pack and cells, motors, inverters, charging, cooling and regenerative brakes. Explode the skateboard chassis.",
  card="Battery skateboard, motors and inverters.",

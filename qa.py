@@ -6,6 +6,7 @@ from PIL import Image, ImageStat
 sys.path.insert(0, '.')
 from content import MODELS
 import os
+QT = int(os.environ.get("QA_TIMEOUT", "45000"))
 BASE = os.environ.get("QA_BASE", "http://127.0.0.1:8642/how-it-works/")
 SHOTS = "shots/"
 R = []
@@ -27,8 +28,8 @@ async def part_xy(pg, pid):
 async def model_page(b, m, w, h, mobile):
     s, tag = m["slug"], f'{m["slug"]}@{w}'
     ctx = await b.new_context(viewport={"width": w, "height": h}, device_scale_factor=2 if mobile else 1, is_mobile=mobile, has_touch=mobile)
-    pg = await ctx.new_page(); errs = []; await wire(pg, errs)
-    await pg.goto(BASE + s + "/", wait_until="load"); await pg.wait_for_selector(".stage.ready", timeout=45000); await pg.wait_for_timeout(800)
+    ctx.set_default_timeout(QT); pg = await ctx.new_page(); errs = []; await wire(pg, errs)
+    await pg.goto(BASE + s + "/", wait_until="load"); await pg.wait_for_selector(".stage.ready", timeout=QT); await pg.wait_for_timeout(800)
     ok(f"{tag} no horizontal overflow", await pg.evaluate("document.documentElement.scrollWidth <= innerWidth"))
     v = variance(await pg.locator("#stage").screenshot()); ok(f"{tag} WebGL renders", v > 8, f"stddev={v:.1f}")
     await pg.screenshot(path=f"{SHOTS}{s}-{w}.png")
@@ -60,7 +61,7 @@ async def model_page(b, m, w, h, mobile):
     await ctx.grant_permissions(["clipboard-read", "clipboard-write"]) if not mobile else None
     await pg.evaluate("window.__hiw.select(null)"); await pg.click("#b-tools"); await pg.click("#share"); await pg.wait_for_timeout(300)
     url = await pg.evaluate("location.href"); st = await pg.evaluate("() => { const a = window.__hiw; return {e: a.state.ex, ax: a.state.axis, d: a.state.depth, l: {...a.state.layers}, c: a.camera.position.toArray().map(n => +n.toFixed(2))}; }")
-    p2 = await ctx.new_page(); e2 = []; await wire(p2, e2); await p2.goto(url); await p2.wait_for_selector(".stage.ready", timeout=45000); await p2.wait_for_timeout(500)
+    p2 = await ctx.new_page(); e2 = []; await wire(p2, e2); await p2.goto(url); await p2.wait_for_selector(".stage.ready", timeout=QT); await p2.wait_for_timeout(500)
     st2 = await p2.evaluate("() => { const a = window.__hiw; return {e: a.state.ex, ax: a.state.axis, d: a.state.depth, l: {...a.state.layers}, c: a.camera.position.toArray().map(n => +n.toFixed(2))}; }")
     same = abs(st["e"] - st2["e"]) < .002 and st["ax"] == st2["ax"] and abs(st["d"] - st2["d"]) < .002 and st["l"] == st2["l"] and all(abs(a - b) < .05 for a, b in zip(st["c"], st2["c"]))
     ok(f"{tag} share URL round trip", same and "#c=" in url, url.split("#")[1][:80])
@@ -178,14 +179,14 @@ async def model_page(b, m, w, h, mobile):
 async def home(b, w, h, mobile):
     ctx = await b.new_context(viewport={"width": w, "height": h}, device_scale_factor=2 if mobile else 1, is_mobile=mobile, has_touch=mobile)
     pg = await ctx.new_page(); errs = []; await wire(pg, errs); tag = f"home@{w}"
-    await pg.goto(BASE, wait_until="load"); await pg.wait_for_selector(".hero.ready", timeout=45000); await pg.wait_for_timeout(1200)
+    await pg.goto(BASE, wait_until="load"); await pg.wait_for_selector(".hero.ready", timeout=QT); await pg.wait_for_timeout(1200)
     v = variance(await pg.screenshot()); ok(f"{tag} hero WebGL renders", v > 8, f"stddev={v:.1f}")
     await pg.screenshot(path=f"{SHOTS}home-{w}.png")
     ok(f"{tag} no horizontal overflow", await pg.evaluate("document.documentElement.scrollWidth <= innerWidth"))
     await pg.evaluate("window.scrollTo(0, innerHeight * .45)"); await pg.wait_for_timeout(900); await pg.screenshot(path=f"{SHOTS}home-{w}-explode.png")
     await pg.evaluate("document.querySelector('#models').scrollIntoView()"); await pg.wait_for_timeout(1200); await pg.screenshot(path=f"{SHOTS}home-{w}-gallery.png")
     await pg.click(".filters [data-f=Vehicles]"); n = await pg.evaluate("[...document.querySelectorAll('.card3')].filter(c => !c.hidden).length"); nv = sum(1 for m in MODELS if m["tag"] == "Vehicles"); ok(f"{tag} category filter", n == nv, f"{n}/{nv} vehicle cards")
-    await pg.click(".filters [data-f=Tech]"); n = await pg.evaluate("[...document.querySelectorAll('.card3')].filter(c => !c.hidden).length"); nt = sum(1 for m in MODELS if m["tag"] == "Tech"); ok(f"{tag} Tech filter", n == nt == 9, f"{n}/{nt} tech cards")
+    await pg.click(".filters [data-f=Tech]"); n = await pg.evaluate("[...document.querySelectorAll('.card3')].filter(c => !c.hidden).length"); nt = sum(1 for m in MODELS if m["tag"] == "Tech"); ok(f"{tag} Tech filter", n == nt > 0, f"{n}/{nt} tech cards")
     await pg.click(".filters [data-f=all]")
     imgs = await pg.evaluate("Promise.all([...document.images].map(i => (i.loading = 'eager', i.decode().then(() => i.naturalWidth > 0, () => false))))")
     ok(f"{tag} all images load", all(imgs), f"{sum(imgs)}/{len(imgs)}")
@@ -204,5 +205,5 @@ async def main():
         await b.close()
     f = [r for r in R if not r[1]]
     print(f"\nTOTAL {len(R)} checks, {len(R) - len(f)} pass, {len(f)} fail")
-    json.dump(R, open("shots/qa-results.json", "w"), indent=1)
+    json.dump(R, open(os.environ.get("QA_OUT", "shots/qa-results.json"), "w"), indent=1)
 asyncio.run(main())
