@@ -5,7 +5,8 @@ from playwright.async_api import async_playwright
 from PIL import Image, ImageStat
 sys.path.insert(0, '.')
 from content import MODELS
-BASE = "http://127.0.0.1:8642/how-it-works/"
+import os
+BASE = os.environ.get("QA_BASE", "http://127.0.0.1:8642/how-it-works/")
 SHOTS = "shots/"
 R = []
 def ok(name, cond, info=""): R.append((name, bool(cond), info)); print(("PASS " if cond else "FAIL ") + name + (f"  {info}" if info else ""), flush=True)

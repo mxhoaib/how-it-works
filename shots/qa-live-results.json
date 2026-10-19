@@ -1,0 +1,162 @@
+[
+ [
+  "home@1440 hero WebGL renders",
+  true,
+  "stddev=55.8"
+ ],
+ [
+  "home@1440 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "home@1440 category filter",
+  true,
+  "2 vehicle cards"
+ ],
+ [
+  "home@1440 all images load",
+  true,
+  "11/11"
+ ],
+ [
+  "home@1440 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "car-engine@1440 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "car-engine@1440 WebGL renders",
+  true,
+  "stddev=56.1"
+ ],
+ [
+  "car-engine@1440 explode moves parts",
+  true,
+  "max offset 0.24\u00d7size"
+ ],
+ [
+  "car-engine@1440 slice plane active",
+  true,
+  "{\"n\": 1, \"d\": 0.55, \"ax\": \"y\"}"
+ ],
+ [
+  "car-engine@1440 click shows label",
+  true,
+  "{\"shown\": true, \"name\": \"Cylinder head\", \"sel\": \"head\"}"
+ ],
+ [
+  "car-engine@1440 share URL round trip",
+  true,
+  "c=2.014,4.546,10.523,-0.025,1.802,0&e=0.37&s=x,0.42&l=block.moving"
+ ],
+ [
+  "car-engine@1440 #part deep link",
+  true,
+  "camshaft"
+ ],
+ [
+  "car-engine@1440 assemble drag-to-snap (mouse)",
+  true,
+  "part=crankshaft placed=1"
+ ],
+ [
+  "car-engine@1440 quiz tap scores",
+  true,
+  "target=block"
+ ],
+ [
+  "car-engine@1440 run RPM slider",
+  true,
+  ""
+ ],
+ [
+  "car-engine@1440 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "home@390 hero WebGL renders",
+  true,
+  "stddev=72.6"
+ ],
+ [
+  "home@390 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "home@390 category filter",
+  true,
+  "2 vehicle cards"
+ ],
+ [
+  "home@390 all images load",
+  true,
+  "11/11"
+ ],
+ [
+  "home@390 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "car-engine@390 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "car-engine@390 WebGL renders",
+  true,
+  "stddev=59.3"
+ ],
+ [
+  "car-engine@390 explode moves parts",
+  true,
+  "max offset 0.24\u00d7size"
+ ],
+ [
+  "car-engine@390 slice plane active",
+  true,
+  "{\"n\": 1, \"d\": 0.55, \"ax\": \"y\"}"
+ ],
+ [
+  "car-engine@390 click shows label",
+  true,
+  "{\"shown\": true, \"name\": \"Camshafts\", \"sel\": \"camshaft\"}"
+ ],
+ [
+  "car-engine@390 share URL round trip",
+  true,
+  "c=2.201,4.909,11.936,-0.025,1.801,0&e=0.37&s=x,0.42&l=block.moving"
+ ],
+ [
+  "car-engine@390 #part deep link",
+  true,
+  "camshaft"
+ ],
+ [
+  "car-engine@390 assemble drag-to-snap (touch)",
+  true,
+  "part=pistons placed=1"
+ ],
+ [
+  "car-engine@390 quiz tap scores",
+  true,
+  "target=spark-plugs"
+ ],
+ [
+  "car-engine@390 run RPM slider",
+  true,
+  ""
+ ],
+ [
+  "car-engine@390 no console errors / failed requests",
+  true,
+  ""
+ ]
+]
