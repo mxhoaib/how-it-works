@@ -1,0 +1,27 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>OG renderer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+<style>html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Inter,-apple-system,Segoe UI,Arial,sans-serif}canvas{position:absolute;inset:0;width:100%;height:100%}
+#t{position:absolute;left:64px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;width:460px;z-index:2}#t p{margin:0 0 14px;font-size:20px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}#t h1{margin:0;font-size:84px;line-height:.98;letter-spacing:-.035em}#t[hidden]{display:none}#t span{margin-top:22px;font-size:24px;opacity:.6}</style></head>
+<body><div id="t" hidden><p id="ey"></p><h1 id="h"></h1><span>How Things Work · interactive 3D</span></div><canvas id="c"></canvas>
+<script type="module">
+// Renders posters (?m=slug&mode=poster), cards (?mode=card) and OG images (?mode=og). Used only by the build-time screenshot script.
+import * as THREE from 'three';
+import { makeRenderer, setupScene, shadowPlane, prepare, applyExplode, fitCamera } from '../assets/js/core.js';
+const q = new URLSearchParams(location.search), slug = q.get('m'), mode = q.get('mode') || 'og', dark = q.get('dark') === '1';
+const meta = { 'car-engine': ['Car engine', '#ff453a'], 'jet-engine': ['Jet engine', '#ff453a'], gearbox: ['Gearbox', '#ff453a'], '3d-printer': ['3D printer', '#30d158'], 'house-wall-section': ['House wall & roof', '#ff9f0a'], skyscraper: ['Skyscraper', '#0a84ff'], 'suspension-bridge': ['Suspension bridge', '#0a84ff'], 'cat-anatomy': ['Cat anatomy', '#bf5af2'], 'electric-pickup': ['Electric pickup', '#30d158'], 'flying-roadster': ['Flying roadster', '#0a84ff'] };
+const bg = dark ? '#000' : '#f5f5f7'; document.body.style.background = bg; document.body.style.color = dark ? '#f5f5f7' : '#1d1d1f';
+const c = document.getElementById('c'), R = makeRenderer(c), scene = setupScene(R, dark); scene.background = new THREE.Color(bg);
+const cam = new THREE.PerspectiveCamera(35, innerWidth / innerHeight, .1, 1000); R.setSize(innerWidth, innerHeight, false);
+const mdl = (await import(`../assets/js/models/${slug}.js`)).build(); scene.add(mdl.root);
+if (mdl.update) mdl.update(0.4, 1.2, mdl.params);
+const prep = prepare(mdl); scene.add(shadowPlane(prep, dark));
+const ex = +(q.get('ex') ?? (mode === 'og' ? .55 : 0)); applyExplode(prep, ex);
+const target = fitCamera(cam, prep, mdl.view, cam.aspect, mode === 'og' ? (.92 + ex * .3) : 1.12 * (1 + ex * .5));
+if (mode === 'og' || q.get('title')) {
+  const t = document.getElementById('t'); t.hidden = false; document.getElementById('h').textContent = q.get('title') || meta[slug][0]; const ey = document.getElementById('ey'); ey.textContent = q.get('eyebrow') || 'How it works'; ey.style.color = meta[slug]?.[1] || '#ff453a';
+  const sh = new THREE.Vector3(); const right = new THREE.Vector3().subVectors(cam.position, target).cross(new THREE.Vector3(0, 1, 0)).normalize();
+  target.addScaledVector(right, prep.size * .3); cam.position.addScaledVector(right, prep.size * .3);
+}
+cam.lookAt(target); R.render(scene, cam); document.title = 'ready';
+</script></body></html>

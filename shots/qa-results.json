@@ -1,0 +1,1112 @@
+[
+ [
+  "home@1440 hero WebGL renders",
+  true,
+  "stddev=55.5"
+ ],
+ [
+  "home@1440 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "home@1440 category filter",
+  true,
+  "2 vehicle cards"
+ ],
+ [
+  "home@1440 all images load",
+  true,
+  "11/11"
+ ],
+ [
+  "home@1440 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "car-engine@1440 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "car-engine@1440 WebGL renders",
+  true,
+  "stddev=56.0"
+ ],
+ [
+  "car-engine@1440 explode moves parts",
+  true,
+  "max offset 0.24\u00d7size"
+ ],
+ [
+  "car-engine@1440 slice plane active",
+  true,
+  "{\"n\": 1, \"d\": 0.55, \"ax\": \"y\"}"
+ ],
+ [
+  "car-engine@1440 click shows label",
+  true,
+  "{\"shown\": true, \"name\": \"Camshafts\", \"sel\": \"camshaft\"}"
+ ],
+ [
+  "car-engine@1440 share URL round trip",
+  true,
+  "c=2.019,4.546,10.522,-0.025,1.802,0&e=0.37&s=x,0.42&l=block.moving"
+ ],
+ [
+  "car-engine@1440 #part deep link",
+  true,
+  "camshaft"
+ ],
+ [
+  "car-engine@1440 assemble drag-to-snap (mouse)",
+  true,
+  "part=crankshaft placed=1"
+ ],
+ [
+  "car-engine@1440 quiz tap scores",
+  true,
+  "target=camshaft"
+ ],
+ [
+  "car-engine@1440 run RPM slider",
+  true,
+  ""
+ ],
+ [
+  "car-engine@1440 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "jet-engine@1440 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "jet-engine@1440 WebGL renders",
+  true,
+  "stddev=36.5"
+ ],
+ [
+  "jet-engine@1440 explode moves parts",
+  true,
+  "max offset 0.25\u00d7size"
+ ],
+ [
+  "jet-engine@1440 slice plane active",
+  true,
+  "{\"n\": 1, \"d\": 0.55, \"ax\": \"y\"}"
+ ],
+ [
+  "jet-engine@1440 click shows label",
+  true,
+  "{\"shown\": true, \"name\": \"Turbine\", \"sel\": \"turbine\"}"
+ ],
+ [
+  "jet-engine@1440 share URL round trip",
+  true,
+  "c=3.903,3.803,9.726,0.498,1.3,-0.02&e=0.37&s=x,0.42&l=casing.rotating"
+ ],
+ [
+  "jet-engine@1440 #part deep link",
+  true,
+  "turbine"
+ ],
+ [
+  "jet-engine@1440 assemble drag-to-snap (mouse)",
+  true,
+  "part=fan placed=1"
+ ],
+ [
+  "jet-engine@1440 quiz tap scores",
+  true,
+  "target=nacelle"
+ ],
+ [
+  "jet-engine@1440 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "gearbox@1440 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "gearbox@1440 WebGL renders",
+  true,
+  "stddev=39.1"
+ ],
+ [
+  "gearbox@1440 explode moves parts",
+  true,
+  "max offset 0.27\u00d7size"
+ ],
+ [
+  "gearbox@1440 slice plane active",
+  true,
+  "{\"n\": 1, \"d\": 0.55, \"ax\": \"y\"}"
+ ],
+ [
+  "gearbox@1440 click shows label",
+  true,
+  "{\"shown\": true, \"name\": \"Driven gears\", \"sel\": \"driven-gears\"}"
+ ],
+ [
+  "gearbox@1440 share URL round trip",
+  true,
+  "c=4.336,6.717,11.957,-0.02,1.725,0.15&e=0.37&s=x,0.42&l=housing.gears"
+ ],
+ [
+  "gearbox@1440 #part deep link",
+  true,
+  "driven-gears"
+ ],
+ [
+  "gearbox@1440 assemble drag-to-snap (mouse)",
+  true,
+  "part=input-shaft placed=1"
+ ],
+ [
+  "gearbox@1440 quiz tap scores",
+  true,
+  "target=drive-gears"
+ ],
+ [
+  "gearbox@1440 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "3d-printer@1440 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "3d-printer@1440 WebGL renders",
+  true,
+  "stddev=53.6"
+ ],
+ [
+  "3d-printer@1440 explode moves parts",
+  true,
+  "max offset 0.33\u00d7size"
+ ],
+ [
+  "3d-printer@1440 slice plane active",
+  true,
+  "{\"n\": 1, \"d\": 0.55, \"ax\": \"y\"}"
+ ],
+ [
+  "3d-printer@1440 click shows label",
+  true,
+  "{\"shown\": true, \"name\": \"Frame\", \"sel\": \"frame\"}"
+ ],
+ [
+  "3d-printer@1440 share URL round trip",
+  true,
+  "c=4.434,5.017,7.678,0,1.85,-0.003&e=0.37&s=x,0.42&l=frame.motion"
+ ],
+ [
+  "3d-printer@1440 #part deep link",
+  true,
+  "belts"
+ ],
+ [
+  "3d-printer@1440 assemble drag-to-snap (mouse)",
+  true,
+  "part=bed placed=1"
+ ],
+ [
+  "3d-printer@1440 quiz tap scores",
+  true,
+  "target=gantry"
+ ],
+ [
+  "3d-printer@1440 print progresses",
+  true,
+  "0.012"
+ ],
+ [
+  "3d-printer@1440 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "house-wall-section@1440 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "house-wall-section@1440 WebGL renders",
+  true,
+  "stddev=26.8"
+ ],
+ [
+  "house-wall-section@1440 explode moves parts",
+  true,
+  "max offset 0.23\u00d7size"
+ ],
+ [
+  "house-wall-section@1440 slice plane active",
+  true,
+  "{\"n\": 1, \"d\": 0.55, \"ax\": \"y\"}"
+ ],
+ [
+  "house-wall-section@1440 click shows label",
+  true,
+  "{\"shown\": true, \"name\": \"Sheathing\", \"sel\": \"sheathing\"}"
+ ],
+ [
+  "house-wall-section@1440 share URL round trip",
+  true,
+  "c=6.428,6.213,8.17,0,2.59,-0.719&e=0.37&s=x,0.42&l=structure.envelope"
+ ],
+ [
+  "house-wall-section@1440 #part deep link",
+  true,
+  "sheathing"
+ ],
+ [
+  "house-wall-section@1440 assemble drag-to-snap (mouse)",
+  true,
+  "part=foundation placed=1"
+ ],
+ [
+  "house-wall-section@1440 quiz tap scores",
+  true,
+  "target=insulation"
+ ],
+ [
+  "house-wall-section@1440 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "skyscraper@1440 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "skyscraper@1440 WebGL renders",
+  true,
+  "stddev=39.0"
+ ],
+ [
+  "skyscraper@1440 explode moves parts",
+  true,
+  "max offset 0.20\u00d7size"
+ ],
+ [
+  "skyscraper@1440 slice plane active",
+  true,
+  "{\"n\": 1, \"d\": 0.55, \"ax\": \"y\"}"
+ ],
+ [
+  "skyscraper@1440 click shows label",
+  true,
+  "{\"shown\": true, \"name\": \"Concrete core\", \"sel\": \"core\"}"
+ ],
+ [
+  "skyscraper@1440 share URL round trip",
+  true,
+  "c=10.164,8.666,15.274,0,2.935,0&e=0.37&s=x,0.42&l=structure.envelope"
+ ],
+ [
+  "skyscraper@1440 #part deep link",
+  true,
+  "columns"
+ ],
+ [
+  "skyscraper@1440 assemble drag-to-snap (mouse)",
+  true,
+  "part=core placed=1"
+ ],
+ [
+  "skyscraper@1440 quiz tap scores",
+  true,
+  "target=elevators"
+ ],
+ [
+  "skyscraper@1440 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "suspension-bridge@1440 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "suspension-bridge@1440 WebGL renders",
+  true,
+  "stddev=30.3"
+ ],
+ [
+  "suspension-bridge@1440 explode moves parts",
+  true,
+  "max offset 0.19\u00d7size"
+ ],
+ [
+  "suspension-bridge@1440 slice plane active",
+  true,
+  "{\"n\": 1, \"d\": 0.55, \"ax\": \"y\"}"
+ ],
+ [
+  "suspension-bridge@1440 click shows label",
+  true,
+  "{\"shown\": true, \"name\": \"Main cables\", \"sel\": \"main-cables\"}"
+ ],
+ [
+  "suspension-bridge@1440 share URL round trip",
+  true,
+  "c=9.476,10.482,25.937,0,2.25,0&e=0.37&s=x,0.42&l=structure"
+ ],
+ [
+  "suspension-bridge@1440 #part deep link",
+  true,
+  "hangers"
+ ],
+ [
+  "suspension-bridge@1440 assemble drag-to-snap (mouse)",
+  true,
+  "part=deck placed=1"
+ ],
+ [
+  "suspension-bridge@1440 quiz tap scores",
+  true,
+  "target=main-cables"
+ ],
+ [
+  "suspension-bridge@1440 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "cat-anatomy@1440 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "cat-anatomy@1440 WebGL renders",
+  true,
+  "stddev=19.4"
+ ],
+ [
+  "cat-anatomy@1440 explode moves parts",
+  true,
+  "max offset 0.25\u00d7size"
+ ],
+ [
+  "cat-anatomy@1440 slice plane active",
+  true,
+  "{\"n\": 1, \"d\": 0.55, \"ax\": \"y\"}"
+ ],
+ [
+  "cat-anatomy@1440 click shows label",
+  true,
+  "{\"shown\": true, \"name\": \"Brain\", \"sel\": \"brain\"}"
+ ],
+ [
+  "cat-anatomy@1440 share URL round trip",
+  true,
+  "c=1.541,3.116,7.97,-0.086,1.164,0&e=0.37&s=x,0.42&l=skin.skeleton"
+ ],
+ [
+  "cat-anatomy@1440 #part deep link",
+  true,
+  "brain"
+ ],
+ [
+  "cat-anatomy@1440 assemble drag-to-snap (mouse)",
+  true,
+  "part=skull placed=1"
+ ],
+ [
+  "cat-anatomy@1440 quiz tap scores",
+  true,
+  "target=skull"
+ ],
+ [
+  "cat-anatomy@1440 pet purrs",
+  true,
+  ""
+ ],
+ [
+  "cat-anatomy@1440 walk moves cat",
+  true,
+  ""
+ ],
+ [
+  "cat-anatomy@1440 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "electric-pickup@1440 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "electric-pickup@1440 WebGL renders",
+  true,
+  "stddev=45.7"
+ ],
+ [
+  "electric-pickup@1440 explode moves parts",
+  true,
+  "max offset 0.20\u00d7size"
+ ],
+ [
+  "electric-pickup@1440 slice plane active",
+  true,
+  "{\"n\": 1, \"d\": 0.55, \"ax\": \"y\"}"
+ ],
+ [
+  "electric-pickup@1440 click shows label",
+  true,
+  "{\"shown\": true, \"name\": \"Frame\", \"sel\": \"frame\"}"
+ ],
+ [
+  "electric-pickup@1440 share URL round trip",
+  true,
+  "c=5.469,3.718,9.037,0.004,1,0&e=0.37&s=x,0.42&l=body.drivetrain"
+ ],
+ [
+  "electric-pickup@1440 #part deep link",
+  true,
+  "suspension"
+ ],
+ [
+  "electric-pickup@1440 assemble drag-to-snap (mouse)",
+  true,
+  "part=frame placed=1"
+ ],
+ [
+  "electric-pickup@1440 quiz tap scores",
+  true,
+  "target=battery"
+ ],
+ [
+  "electric-pickup@1440 drive keyboard controls move vehicle",
+  true,
+  "moved 13.3, alt 0.0"
+ ],
+ [
+  "electric-pickup@1440 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "flying-roadster@1440 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "flying-roadster@1440 WebGL renders",
+  true,
+  "stddev=37.6"
+ ],
+ [
+  "flying-roadster@1440 explode moves parts",
+  true,
+  "max offset 0.18\u00d7size"
+ ],
+ [
+  "flying-roadster@1440 slice plane active",
+  true,
+  "{\"n\": 1, \"d\": 0.55, \"ax\": \"y\"}"
+ ],
+ [
+  "flying-roadster@1440 click shows label",
+  true,
+  "{\"shown\": true, \"name\": \"Body\", \"sel\": \"body\"}"
+ ],
+ [
+  "flying-roadster@1440 share URL round trip",
+  true,
+  "c=4.222,4.198,9.326,-0.094,0.87,0&e=0.37&s=x,0.42&l=airframe.propulsion"
+ ],
+ [
+  "flying-roadster@1440 #part deep link",
+  true,
+  "ducted-fans"
+ ],
+ [
+  "flying-roadster@1440 assemble drag-to-snap (mouse)",
+  true,
+  "part=canopy placed=1"
+ ],
+ [
+  "flying-roadster@1440 quiz tap scores",
+  true,
+  "target=ducted-fans"
+ ],
+ [
+  "flying-roadster@1440 fly keyboard controls move vehicle",
+  true,
+  "moved 5.6, alt 5.0"
+ ],
+ [
+  "flying-roadster@1440 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "home@390 hero WebGL renders",
+  true,
+  "stddev=72.6"
+ ],
+ [
+  "home@390 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "home@390 category filter",
+  true,
+  "2 vehicle cards"
+ ],
+ [
+  "home@390 all images load",
+  true,
+  "11/11"
+ ],
+ [
+  "home@390 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "car-engine@390 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "car-engine@390 WebGL renders",
+  true,
+  "stddev=59.3"
+ ],
+ [
+  "car-engine@390 explode moves parts",
+  true,
+  "max offset 0.24\u00d7size"
+ ],
+ [
+  "car-engine@390 slice plane active",
+  true,
+  "{\"n\": 1, \"d\": 0.55, \"ax\": \"y\"}"
+ ],
+ [
+  "car-engine@390 click shows label",
+  true,
+  "{\"shown\": true, \"name\": \"Camshafts\", \"sel\": \"camshaft\"}"
+ ],
+ [
+  "car-engine@390 share URL round trip",
+  true,
+  "c=2.187,4.909,11.938,-0.025,1.801,0&e=0.37&s=x,0.42&l=block.moving"
+ ],
+ [
+  "car-engine@390 #part deep link",
+  true,
+  "camshaft"
+ ],
+ [
+  "car-engine@390 assemble drag-to-snap (touch)",
+  true,
+  "part=crankshaft placed=1"
+ ],
+ [
+  "car-engine@390 quiz tap scores",
+  true,
+  "target=block"
+ ],
+ [
+  "car-engine@390 run RPM slider",
+  true,
+  ""
+ ],
+ [
+  "car-engine@390 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "jet-engine@390 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "jet-engine@390 WebGL renders",
+  true,
+  "stddev=40.7"
+ ],
+ [
+  "jet-engine@390 explode moves parts",
+  true,
+  "max offset 0.25\u00d7size"
+ ],
+ [
+  "jet-engine@390 slice plane active",
+  true,
+  "{\"n\": 1, \"d\": 0.55, \"ax\": \"y\"}"
+ ],
+ [
+  "jet-engine@390 click shows label",
+  true,
+  "{\"shown\": true, \"name\": \"Turbine\", \"sel\": \"turbine\"}"
+ ],
+ [
+  "jet-engine@390 share URL round trip",
+  true,
+  "c=4.25,4.135,11.059,0.498,1.299,-0.02&e=0.37&s=x,0.42&l=casing.rotating"
+ ],
+ [
+  "jet-engine@390 #part deep link",
+  true,
+  "turbine"
+ ],
+ [
+  "jet-engine@390 assemble drag-to-snap (touch)",
+  true,
+  "part=fan placed=1"
+ ],
+ [
+  "jet-engine@390 quiz tap scores",
+  true,
+  "target=compressor"
+ ],
+ [
+  "jet-engine@390 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "gearbox@390 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "gearbox@390 WebGL renders",
+  true,
+  "stddev=42.3"
+ ],
+ [
+  "gearbox@390 explode moves parts",
+  true,
+  "max offset 0.27\u00d7size"
+ ],
+ [
+  "gearbox@390 slice plane active",
+  true,
+  "{\"n\": 1, \"d\": 0.55, \"ax\": \"y\"}"
+ ],
+ [
+  "gearbox@390 click shows label",
+  true,
+  "{\"shown\": true, \"name\": \"Driven gears\", \"sel\": \"driven-gears\"}"
+ ],
+ [
+  "gearbox@390 share URL round trip",
+  true,
+  "c=4.807,7.382,13.568,-0.02,1.725,0.15&e=0.37&s=x,0.42&l=housing.gears"
+ ],
+ [
+  "gearbox@390 #part deep link",
+  true,
+  "driven-gears"
+ ],
+ [
+  "gearbox@390 assemble drag-to-snap (touch)",
+  true,
+  "part=output-shaft placed=1"
+ ],
+ [
+  "gearbox@390 quiz tap scores",
+  true,
+  "target=bearings"
+ ],
+ [
+  "gearbox@390 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "3d-printer@390 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "3d-printer@390 WebGL renders",
+  true,
+  "stddev=57.3"
+ ],
+ [
+  "3d-printer@390 explode moves parts",
+  true,
+  "max offset 0.33\u00d7size"
+ ],
+ [
+  "3d-printer@390 slice plane active",
+  true,
+  "{\"n\": 1, \"d\": 0.55, \"ax\": \"y\"}"
+ ],
+ [
+  "3d-printer@390 click shows label",
+  true,
+  "{\"shown\": true, \"name\": \"Frame\", \"sel\": \"frame\"}"
+ ],
+ [
+  "3d-printer@390 share URL round trip",
+  true,
+  "c=4.948,5.438,8.744,0,1.85,-0.003&e=0.37&s=x,0.42&l=frame.motion"
+ ],
+ [
+  "3d-printer@390 #part deep link",
+  true,
+  "belts"
+ ],
+ [
+  "3d-printer@390 assemble drag-to-snap (touch)",
+  true,
+  "part=bed placed=1"
+ ],
+ [
+  "3d-printer@390 quiz tap scores",
+  true,
+  "target=steppers"
+ ],
+ [
+  "3d-printer@390 print progresses",
+  true,
+  "0.011"
+ ],
+ [
+  "3d-printer@390 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "house-wall-section@390 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "house-wall-section@390 WebGL renders",
+  true,
+  "stddev=30.8"
+ ],
+ [
+  "house-wall-section@390 explode moves parts",
+  true,
+  "max offset 0.23\u00d7size"
+ ],
+ [
+  "house-wall-section@390 slice plane active",
+  true,
+  "{\"n\": 1, \"d\": 0.55, \"ax\": \"y\"}"
+ ],
+ [
+  "house-wall-section@390 click shows label",
+  true,
+  "{\"shown\": true, \"name\": \"Sheathing\", \"sel\": \"sheathing\"}"
+ ],
+ [
+  "house-wall-section@390 share URL round trip",
+  true,
+  "c=7.193,6.696,9.418,0,2.59,-0.719&e=0.37&s=x,0.42&l=structure.envelope"
+ ],
+ [
+  "house-wall-section@390 #part deep link",
+  true,
+  "sheathing"
+ ],
+ [
+  "house-wall-section@390 assemble drag-to-snap (touch)",
+  true,
+  "part=sheathing placed=1"
+ ],
+ [
+  "house-wall-section@390 quiz tap scores",
+  true,
+  "target=insulation"
+ ],
+ [
+  "house-wall-section@390 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "skyscraper@390 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "skyscraper@390 WebGL renders",
+  true,
+  "stddev=42.9"
+ ],
+ [
+  "skyscraper@390 explode moves parts",
+  true,
+  "max offset 0.20\u00d7size"
+ ],
+ [
+  "skyscraper@390 slice plane active",
+  true,
+  "{\"n\": 1, \"d\": 0.55, \"ax\": \"y\"}"
+ ],
+ [
+  "skyscraper@390 click shows label",
+  true,
+  "{\"shown\": true, \"name\": \"Concrete core\", \"sel\": \"core\"}"
+ ],
+ [
+  "skyscraper@390 share URL round trip",
+  true,
+  "c=11.467,9.428,17.34,0,2.935,0&e=0.37&s=x,0.42&l=structure.envelope"
+ ],
+ [
+  "skyscraper@390 #part deep link",
+  true,
+  "columns"
+ ],
+ [
+  "skyscraper@390 assemble drag-to-snap (touch)",
+  true,
+  "part=piles placed=1"
+ ],
+ [
+  "skyscraper@390 quiz tap scores",
+  true,
+  "target=piles"
+ ],
+ [
+  "skyscraper@390 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "suspension-bridge@390 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "suspension-bridge@390 WebGL renders",
+  true,
+  "stddev=34.6"
+ ],
+ [
+  "suspension-bridge@390 explode moves parts",
+  true,
+  "max offset 0.19\u00d7size"
+ ],
+ [
+  "suspension-bridge@390 slice plane active",
+  true,
+  "{\"n\": 1, \"d\": 0.55, \"ax\": \"y\"}"
+ ],
+ [
+  "suspension-bridge@390 click shows label",
+  true,
+  "{\"shown\": true, \"name\": \"Main cables\", \"sel\": \"main-cables\"}"
+ ],
+ [
+  "suspension-bridge@390 share URL round trip",
+  true,
+  "c=10.387,11.577,29.515,0,2.25,0&e=0.37&s=x,0.42&l=structure"
+ ],
+ [
+  "suspension-bridge@390 #part deep link",
+  true,
+  "hangers"
+ ],
+ [
+  "suspension-bridge@390 assemble drag-to-snap (touch)",
+  true,
+  "part=deck placed=1"
+ ],
+ [
+  "suspension-bridge@390 quiz tap scores",
+  true,
+  "target=towers"
+ ],
+ [
+  "suspension-bridge@390 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "cat-anatomy@390 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "cat-anatomy@390 WebGL renders",
+  true,
+  "stddev=24.1"
+ ],
+ [
+  "cat-anatomy@390 explode moves parts",
+  true,
+  "max offset 0.25\u00d7size"
+ ],
+ [
+  "cat-anatomy@390 slice plane active",
+  true,
+  "{\"n\": 1, \"d\": 0.55, \"ax\": \"y\"}"
+ ],
+ [
+  "cat-anatomy@390 click shows label",
+  true,
+  "{\"shown\": true, \"name\": \"Brain\", \"sel\": \"brain\"}"
+ ],
+ [
+  "cat-anatomy@390 share URL round trip",
+  true,
+  "c=1.622,3.369,9.031,-0.087,1.163,0&e=0.37&s=x,0.42&l=skin.skeleton"
+ ],
+ [
+  "cat-anatomy@390 #part deep link",
+  true,
+  "brain"
+ ],
+ [
+  "cat-anatomy@390 assemble drag-to-snap (touch)",
+  true,
+  "part=skull placed=1"
+ ],
+ [
+  "cat-anatomy@390 quiz tap scores",
+  true,
+  "target=heart"
+ ],
+ [
+  "cat-anatomy@390 pet purrs",
+  true,
+  ""
+ ],
+ [
+  "cat-anatomy@390 walk moves cat",
+  true,
+  ""
+ ],
+ [
+  "cat-anatomy@390 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "electric-pickup@390 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "electric-pickup@390 WebGL renders",
+  true,
+  "stddev=50.1"
+ ],
+ [
+  "electric-pickup@390 explode moves parts",
+  true,
+  "max offset 0.20\u00d7size"
+ ],
+ [
+  "electric-pickup@390 slice plane active",
+  true,
+  "{\"n\": 1, \"d\": 0.55, \"ax\": \"y\"}"
+ ],
+ [
+  "electric-pickup@390 click shows label",
+  true,
+  "{\"shown\": true, \"name\": \"Frame\", \"sel\": \"frame\"}"
+ ],
+ [
+  "electric-pickup@390 share URL round trip",
+  true,
+  "c=5.967,4.08,10.376,0.004,1,0&e=0.37&s=x,0.42&l=body.drivetrain"
+ ],
+ [
+  "electric-pickup@390 #part deep link",
+  true,
+  "suspension"
+ ],
+ [
+  "electric-pickup@390 assemble drag-to-snap (touch)",
+  true,
+  "part=frame placed=1"
+ ],
+ [
+  "electric-pickup@390 quiz tap scores",
+  true,
+  "target=motors"
+ ],
+ [
+  "electric-pickup@390 drive touch controls move vehicle",
+  true,
+  "moved 14.6, alt 0.0"
+ ],
+ [
+  "electric-pickup@390 no console errors / failed requests",
+  true,
+  ""
+ ],
+ [
+  "flying-roadster@390 no horizontal overflow",
+  true,
+  ""
+ ],
+ [
+  "flying-roadster@390 WebGL renders",
+  true,
+  "stddev=41.7"
+ ],
+ [
+  "flying-roadster@390 explode moves parts",
+  true,
+  "max offset 0.18\u00d7size"
+ ],
+ [
+  "flying-roadster@390 slice plane active",
+  true,
+  "{\"n\": 1, \"d\": 0.55, \"ax\": \"y\"}"
+ ],
+ [
+  "flying-roadster@390 click shows label",
+  true,
+  "{\"shown\": true, \"name\": \"Body\", \"sel\": \"body\"}"
+ ],
+ [
+  "flying-roadster@390 share URL round trip",
+  true,
+  "c=4.691,4.632,10.582,-0.099,0.87,0&e=0.37&s=x,0.42&l=airframe.propulsion"
+ ],
+ [
+  "flying-roadster@390 #part deep link",
+  true,
+  "ducted-fans"
+ ],
+ [
+  "flying-roadster@390 assemble drag-to-snap (touch)",
+  true,
+  "part=canopy placed=1"
+ ],
+ [
+  "flying-roadster@390 quiz tap scores",
+  true,
+  "target=wings"
+ ],
+ [
+  "flying-roadster@390 fly touch controls move vehicle",
+  true,
+  "moved 12.7, alt 11.3"
+ ],
+ [
+  "flying-roadster@390 no console errors / failed requests",
+  true,
+  ""
+ ]
+]

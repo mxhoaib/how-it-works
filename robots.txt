@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /how-it-works/pay/
+Disallow: /how-it-works/tools/
+Sitemap: https://mxhoaib.github.io/how-it-works/sitemap.xml
