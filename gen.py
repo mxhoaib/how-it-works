@@ -67,7 +67,7 @@ def page(m):
 {nav(pre="../")}
 <nav class="subnav" aria-label="Sections"><div class="wrap"><b>{E(m["name"])}</b><a href="#overview">Overview</a><a href="#explode">Explode</a><a href="#slice">Slice</a><a href="#parts">Parts</a><a href="#facts">Facts</a><a href="#how">Read</a></div><div class="progress"><i></i></div></nav>
 <main>
-<section class="intro"><div class="wrap"><p class="eyebrow">How it works · {E(m["tag"])}</p><h1 class="hero-h">{E(m["name"])}.</h1><p class="lede">{E(m["lede"])}</p><div class="row"><a class="btn" href="#explode">Take it apart</a><button class="btn ghost" type="button" data-mode="assemble">Play: assemble it</button></div></div></section>
+<section class="intro"><div class="wrap"><p class="eyebrow">How it works · {E(m["tag"])}</p><h1 class="hero-h">{E(m["name"])}.</h1><p class="lede">{E(m["lede"])}</p>{('<p class="muted disclaimer" style="font-size:14px;margin-top:12px">' + E(m["disclaimer"]) + '</p>') if m.get("disclaimer") else ""}<div class="row"><a class="btn" href="#explode">Take it apart</a><button class="btn ghost" type="button" data-mode="assemble">Play: assemble it</button></div></div></section>
 <section class="story" id="story">
 <div class="stage" id="stage" style="--accent:{m["accent"]}">
 <img class="poster" src="../assets/img/{s}-poster.webp" alt="3D model of a {E(m["name"].lower())}" width="1200" height="900" fetchpriority="high" decoding="async">
@@ -85,7 +85,7 @@ def page(m):
 <article class="step" id="parts" data-step="parts"><div class="card reveal"><p class="num">04 / 05</p><p class="eyebrow">Parts</p><h2>Tap to learn.</h2><p>Pick a part or tap a glowing dot. It lights up and everything else fades back.</p><div class="chips">{chips}</div></div></article>
 <article class="step" id="facts" data-step="facts"><div class="card"><p class="num">05 / 05</p><p class="eyebrow">Facts</p><h2>Worth knowing.</h2><div class="tiles">{tiles}</div></div></article>
 </div></section>
-<section class="article" id="how"><div class="wrap"><p class="eyebrow">Explained</p><h2>How a {E(m["name"].lower())} works.</h2>{art}<h3>Parts glossary</h3><dl class="gloss">{gloss}</dl></div></section>
+<section class="article" id="how"><div class="wrap"><p class="eyebrow">Explained</p><h2>How a {E(m["name"].lower())} works.</h2>{art}<h3>Parts glossary</h3><dl class="gloss">{gloss}</dl>{('<p class="muted disclaimer" style="font-size:14px;margin-top:24px">' + E(m["disclaimer"]) + '</p>') if m.get("disclaimer") else ""}</div></section>
 <section class="related"><div class="wrap"><p class="eyebrow">Keep exploring</p><h2 class="sec-h">Related models.</h2><div class="grid">{rel}</div><p style="margin-top:28px"><a class="btn ghost" href="../">All models</a></p></div></section>
 {cta()}
 </main>
