@@ -1,8 +1,8 @@
 // Shared play layer: assemble puzzle, find-the-part quiz, timers, local leaderboards, score cards and challenge links.
 // Loaded lazily, only when a play mode is opened.
 import * as THREE from 'three';
-const MODES = { assemble: 'Assemble it', quiz: 'Find the part', run: 'Run the engine', print: 'Print', pet: 'Pet and walk', drive: 'Drive', fly: 'Fly' };
-const HIGHER = { fly: true };
+const MODES = { assemble: 'Assemble it', quiz: 'Find the part', run: 'Run the engine', print: 'Print', pet: 'Pet and walk', drive: 'Drive', fly: 'Fly', peel: 'Open it layer by layer', water: 'Water test', press: 'Press the key', zoom: 'Zoom to transistors', load: 'Run a load', hinge: 'Open the lid', write: 'Write data' };
+const HIGHER = { fly: true, press: true };
 let G = null;
 const fmt = ms => { const s = ms / 1000, m = Math.floor(s / 60); return `${m}:${(s - m * 60).toFixed(1).padStart(4, '0')}`; };
 const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
@@ -164,8 +164,12 @@ function assemble(api, challenge) {
 }
 // ---------- quiz ----------
 function quiz(api, challenge) {
-  const S = session(api, 'quiz', { ex: .32 }), D = api.D;
-  const ids = shuffle(api.prep.list.filter(p => p.obj.visible).map(p => p.id)).slice(0, Math.min(8, api.prep.list.length));
+  const S = session(api, 'quiz', { ex: api.mdl.quizEx ?? .32 }), D = api.D;
+  // only ask for parts you can actually tap from the starting view (small inner parts can hide behind others)
+  api.mdl.root.updateMatrixWorld(true); const c = api.canvas.getBoundingClientRect(), seen = new Set();
+  for (let gx = 0; gx < 30; gx++) for (let gy = 0; gy < 22; gy++) { const x = c.left + c.width * (gx + .5) / 30, y = c.top + 150 + (c.height - 210) * (gy + .5) / 22, h = api.pick({ clientX: x, clientY: y }); if (h) seen.add(h.id); }
+  let pool = api.prep.list.filter(p => p.obj.visible && seen.has(p.id)).map(p => p.id); if (pool.length < 4) pool = api.prep.list.filter(p => p.obj.visible).map(p => p.id);
+  const ids = shuffle(pool).slice(0, Math.min(8, pool.length));
   let i = 0, first = true, score = 0, down = null;
   const ask = () => (api.quizTarget = ids[i], S.prompt(`Tap the ${D.parts[ids[i]].name.toLowerCase()}`, `Round ${i + 1} of ${ids.length} · wrong taps add 3 s`));
   ask(); S.score(`<b>0</b> pts`);
@@ -188,5 +192,5 @@ export async function start(mode, api, ch) {
   if (mode === 'assemble') G = assemble(api, ch);
   else if (mode === 'quiz') G = quiz(api, ch);
   else { const m = await import(`./play/${mode}.js`); G = m.start(api, { session, result, input, board, util, challenge: ch }); }
-  return G;
+  api.G = G; return G;
 }

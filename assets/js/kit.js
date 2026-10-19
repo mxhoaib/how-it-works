@@ -71,3 +71,42 @@ export function model() {
   const part = (id, p = [0, 0, 0]) => { const g = new THREE.Group(); g.name = id; g.position.set(...p); root.add(g); parts[id] = g; return g; };
   return { root, parts, part };
 }
+// ---- tech helpers ----
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+export const rbox = (w, h, d, r = .05, s = 3) => new RoundedBoxGeometry(w, h, d, MOBILE ? 2 : s, Math.min(r, w / 2 - 1e-3, h / 2 - 1e-3, d / 2 - 1e-3));
+// rounded-rectangle band (device frame / seal) in the XZ plane, height h, wall t
+export function band(parent, w, d, h, r, t, material, y = 0) {
+  const g = grp(parent, [0, y, 0]);
+  add(g, box(w - 2 * r, h, t), material, [0, 0, d / 2 - t / 2]); add(g, box(w - 2 * r, h, t), material, [0, 0, -d / 2 + t / 2]);
+  add(g, box(t, h, d - 2 * r), material, [w / 2 - t / 2, 0, 0]); add(g, box(t, h, d - 2 * r), material, [-w / 2 + t / 2, 0, 0]);
+  [[1, 1], [1, -1], [-1, 1], [-1, -1]].forEach(([sx, sz]) => {
+    const a0 = Math.atan2(sx, sz) - Math.PI / 4; // quarter facing the corner
+    add(g, new THREE.CylinderGeometry(r, r, h, S(12), 1, true, a0, Math.PI / 2), material, [sx * (w / 2 - r), 0, sz * (d / 2 - r)]);
+    add(g, new THREE.CylinderGeometry(r - t, r - t, h, S(12), 1, true, a0, Math.PI / 2), material, [sx * (w / 2 - r), 0, sz * (d / 2 - r)]);
+  });
+  return g;
+}
+// canvas texture helper
+export function ctex(w, h, draw) { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d'), w, h); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4; return t; }
+export function screenTex(kind = 'phone') {
+  return ctex(256, kind === 'laptop' ? 160 : kind === 'watch' ? 256 : 512, (x, w, h) => {
+    const g = x.createLinearGradient(0, 0, w, h); g.addColorStop(0, '#1b2a6b'); g.addColorStop(.5, '#6a2c91'); g.addColorStop(1, '#e0565b'); x.fillStyle = g; x.fillRect(0, 0, w, h);
+    x.fillStyle = 'rgba(255,255,255,.85)';
+    if (kind === 'watch') { x.beginPath(); x.arc(w / 2, h / 2, 90, 0, 7); x.lineWidth = 14; x.strokeStyle = '#30d158'; x.stroke(); x.font = '700 54px sans-serif'; x.textAlign = 'center'; x.fillText('10:09', w / 2, h / 2 + 18); return; }
+    if (kind === 'laptop') { x.fillStyle = 'rgba(255,255,255,.9)'; x.fillRect(0, 0, w, 8); x.fillStyle = 'rgba(255,255,255,.25)'; x.fillRect(20, 24, 140, 96); x.fillRect(170, 24, 66, 60); x.fillStyle = 'rgba(255,255,255,.7)'; x.fillRect(80, h - 16, 96, 10); return; }
+    x.font = '600 40px sans-serif'; x.textAlign = 'center'; x.fillText('9:41', w / 2, 70);
+    for (let i = 0; i < 4; i++) for (let j = 0; j < 5; j++) { x.fillStyle = `hsla(${(i * 50 + j * 70) % 360},70%,65%,.9)`; x.beginPath(); x.roundRect(22 + i * 58, 120 + j * 66, 42, 42, 10); x.fill(); }
+    x.fillStyle = 'rgba(255,255,255,.35)'; x.beginPath(); x.roundRect(18, h - 80, w - 36, 56, 18); x.fill();
+  });
+}
+export function pcbTex(color = '#0f3d2e') {
+  return ctex(256, 256, (x, w, h) => { x.fillStyle = color; x.fillRect(0, 0, w, h); x.strokeStyle = 'rgba(210,180,90,.45)'; x.lineWidth = 1.2;
+    for (let i = 0; i < 70; i++) { let px = Math.random() * w, py = Math.random() * h; x.beginPath(); x.moveTo(px, py); for (let k = 0; k < 4; k++) { if (k % 2) px += (Math.random() - .5) * 80; else py += (Math.random() - .5) * 80; x.lineTo(px, py); } x.stroke(); }
+    x.fillStyle = 'rgba(220,190,100,.6)'; for (let i = 0; i < 90; i++) { x.beginPath(); x.arc(Math.random() * w, Math.random() * h, 1.6, 0, 7); x.fill(); } });
+}
+// sprinkle n small SMD parts on a rectangle (merged into one mesh)
+export function smd(parent, n, x0, x1, z0, z1, y, material, size = .03) {
+  const gs = []; for (let i = 0; i < n; i++) { const g = new THREE.BoxGeometry(size * (1 + Math.random()), size * .6, size * (.6 + Math.random() * .6)); g.translate(x0 + Math.random() * (x1 - x0), y + size * .3, z0 + Math.random() * (z1 - z0)); gs.push(g); }
+  return add(parent, mergeGeometries(gs), material);
+}
+export function helix(r, h, turns, tr, seg = 120) { const pts = []; for (let i = 0; i <= seg; i++) { const a = i / seg * turns * Math.PI * 2; pts.push([Math.cos(a) * r, i / seg * h - h / 2, Math.sin(a) * r]); } return tube(pts, tr, seg * 1.5, 8); }

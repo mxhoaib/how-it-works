@@ -250,3 +250,9 @@ MODES = {
  "drive": ("Drive", "Lap a test track. WASD, arrows or the touch stick."),
  "fly": ("Fly", "Lift off, hover and fly through the rings."),
 }
+
+import os
+from content_tech import TECH, TECH_MODES
+_only = [x for x in os.environ.get("HIW_TECH", "").split(",") if x]
+MODELS += [m for m in TECH if not _only or m["slug"] in _only]
+MODES.update(TECH_MODES)

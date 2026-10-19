@@ -11,8 +11,8 @@ for m in MODELS:
     JOBS += [(f"?m={s}&mode=poster", 1200, 900, f"assets/img/{s}-poster.webp"),
              (f"?m={s}&mode=card", 800, 600, f"assets/img/{s}-card.webp"),
              (f"?m={s}&mode=og&dark=1", 1200, 630, f"assets/img/{s}-og.png")]
-JOBS += [("?m=car-engine&mode=poster&dark=1&ex=0", 1600, 800, "assets/img/home-poster.webp"),
-         ("?m=car-engine&mode=og&dark=1&title=How%20things%20work.&eyebrow=Interactive%203D", 1200, 630, "assets/img/home-og.png")]
+JOBS += [("?m=smartphone&mode=poster&dark=1&ex=0&tilt=1&hero=1", 1600, 800, "assets/img/home-poster.webp"),
+         ("?m=smartphone&mode=og&dark=1&tilt=1&ex=.2&title=How%20things%20work.&eyebrow=Interactive%203D", 1200, 630, "assets/img/home-og.png")]
 only = sys.argv[1:]
 async def main():
     async with async_playwright() as p:

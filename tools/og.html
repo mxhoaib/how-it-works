@@ -9,19 +9,19 @@
 import * as THREE from 'three';
 import { makeRenderer, setupScene, shadowPlane, prepare, applyExplode, fitCamera } from '../assets/js/core.js';
 const q = new URLSearchParams(location.search), slug = q.get('m'), mode = q.get('mode') || 'og', dark = q.get('dark') === '1';
-const meta = { 'car-engine': ['Car engine', '#ff453a'], 'jet-engine': ['Jet engine', '#ff453a'], gearbox: ['Gearbox', '#ff453a'], '3d-printer': ['3D printer', '#30d158'], 'house-wall-section': ['House wall & roof', '#ff9f0a'], skyscraper: ['Skyscraper', '#0a84ff'], 'suspension-bridge': ['Suspension bridge', '#0a84ff'], 'cat-anatomy': ['Cat anatomy', '#bf5af2'], 'electric-pickup': ['Electric pickup', '#30d158'], 'flying-roadster': ['Flying roadster', '#0a84ff'] };
+const meta = { 'wireless-earbuds': ['Wireless earbuds', '#0a84ff'], 'smartphone': ['Smartphone', '#0a84ff'], 'smartwatch': ['Smartwatch', '#ff9f0a'], 'laptop': ['Laptop', '#bf5af2'], 'cpu': ['CPU', '#30d158'], 'processor-die': ['Processor die', '#64d2ff'], 'gpu-card': ['Graphics card', '#ff453a'], 'ssd': ['SSD', '#30d158'], 'keyboard-switch': ['Keyboard switch', '#ff9f0a'], 'car-engine': ['Car engine', '#ff453a'], 'jet-engine': ['Jet engine', '#ff453a'], gearbox: ['Gearbox', '#ff453a'], '3d-printer': ['3D printer', '#30d158'], 'house-wall-section': ['House wall & roof', '#ff9f0a'], skyscraper: ['Skyscraper', '#0a84ff'], 'suspension-bridge': ['Suspension bridge', '#0a84ff'], 'cat-anatomy': ['Cat anatomy', '#bf5af2'], 'electric-pickup': ['Electric pickup', '#30d158'], 'flying-roadster': ['Flying roadster', '#0a84ff'] };
 const bg = dark ? '#000' : '#f5f5f7'; document.body.style.background = bg; document.body.style.color = dark ? '#f5f5f7' : '#1d1d1f';
 const c = document.getElementById('c'), R = makeRenderer(c), scene = setupScene(R, dark); scene.background = new THREE.Color(bg);
 const cam = new THREE.PerspectiveCamera(35, innerWidth / innerHeight, .1, 1000); R.setSize(innerWidth, innerHeight, false);
-const mdl = (await import(`../assets/js/models/${slug}.js`)).build(); scene.add(mdl.root);
+const mdl = (await import(`../assets/js/models/${slug}.js`)).build(); if (q.get('tilt')) { mdl.root.rotation.set(1.12, -.35, 0); mdl.root.updateMatrixWorld(true); } scene.add(mdl.root);
 if (mdl.update) mdl.update(0.4, 1.2, mdl.params);
 const prep = prepare(mdl); scene.add(shadowPlane(prep, dark));
 const ex = +(q.get('ex') ?? (mode === 'og' ? .55 : 0)); applyExplode(prep, ex);
-const target = fitCamera(cam, prep, mdl.view, cam.aspect, mode === 'og' ? (.92 + ex * .3) : 1.12 * (1 + ex * .5));
+const target = q.get('hero') ? fitCamera(cam, prep, [.2, .28, 1], cam.aspect, 1.05) : fitCamera(cam, prep, mdl.view, cam.aspect, mode === 'og' ? (.92 + ex * .3) * (mdl.ogK || 1) : 1.12 * (1 + ex * .5));
 if (mode === 'og' || q.get('title')) {
   const t = document.getElementById('t'); t.hidden = false; document.getElementById('h').textContent = q.get('title') || meta[slug][0]; const ey = document.getElementById('ey'); ey.textContent = q.get('eyebrow') || 'How it works'; ey.style.color = meta[slug]?.[1] || '#ff453a';
   const sh = new THREE.Vector3(); const right = new THREE.Vector3().subVectors(cam.position, target).cross(new THREE.Vector3(0, 1, 0)).normalize();
-  target.addScaledVector(right, prep.size * .3); cam.position.addScaledVector(right, prep.size * .3);
+  const sk = prep.size * .3 * (mdl.ogK || 1); target.addScaledVector(right, sk); cam.position.addScaledVector(right, sk);
 }
 cam.lookAt(target); R.render(scene, cam); document.title = 'ready';
 </script></body></html>

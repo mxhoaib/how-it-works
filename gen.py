@@ -18,11 +18,12 @@ ICON = {
  "play": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>',
  "reset": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.3-5.6"/><path d="M4 4v4h4"/></svg>',
 }
+CPUNAV = '<a class="hide-m" href="{pre}cpu/">CPU</a>' if "cpu" in BY else '<a class="hide-m" href="{pre}jet-engine/">Jet</a>'
 def nav(dark=False, pre=""):
-    return f'''<header class="nav{' dark' if dark else ''}"><div class="wrap"><a class="logo" href="{pre or './'}"><i aria-hidden="true"></i>How Things Work</a><nav aria-label="Main"><a href="{pre}#models">Models</a><a class="hide-m" href="{pre}car-engine/">Engine</a><a class="hide-m" href="{pre}jet-engine/">Jet</a><a class="support" href="{pre}pay/?item=support" rel="nofollow" aria-label="Support this project"><span class="lg">Support this project</span><span class="sm">Support</span></a></nav></div></header>'''
+    return f'''<header class="nav{' dark' if dark else ''}"><div class="wrap"><a class="logo" href="{pre or './'}"><i aria-hidden="true"></i>How Things Work</a><nav aria-label="Main"><a href="{pre}#models">Models</a><a class="hide-m" href="{pre}smartphone/">Phone</a>{CPUNAV.format(pre=pre)}<a class="hide-m" href="{pre}car-engine/">Engine</a><a class="support" href="{pre}pay/?item=support" rel="nofollow" aria-label="Support this project"><span class="lg">Support this project</span><span class="sm">Support</span></a></nav></div></header>'''
 def footer(pre=""):
     cols = []
-    for tag in ["Machines", "Buildings", "Vehicles", "Nature"]:
+    for tag in ["Tech", "Machines", "Buildings", "Vehicles", "Nature"]:
         cols.append(f'<div><h4>{tag}</h4>' + "".join(f'<a href="{pre}{m["slug"]}/">{E(m["name"])}</a>' for m in MODELS if m["tag"] == tag) + '</div>')
     cols.append(f'<div><h4>Project</h4><a href="{pre}">All models</a><a href="{pre}pay/?item=support" rel="nofollow">Support this project</a><a href="https://github.com/mxhoaib/how-it-works/blob/main/CREDITS.md">Credits</a><a href="https://github.com/mxhoaib/how-it-works">Source on GitHub</a></div>')
     cols.append('<div><h4>D3DDD</h4><a href="https://d3ddd.com">d3ddd.com</a><a href="mailto:info@d3ddd.com">info@d3ddd.com</a></div>')
@@ -55,7 +56,10 @@ def page(m):
     modes = "".join(f'<button type="button" data-mode="{k}"><b>{E(MODES[k][0])}</b><small>{E(MODES[k][1])}</small></button>' for k in data["modes"])
     art = "".join(f'<h3>{E(h)}</h3>' + "".join(f"<p>{E(p)}</p>" for p in ps) for h, ps in m["article"])
     gloss = "".join(f'<div><dt>{E(n)}</dt><dd>{E(d)}{(" <em>Fun fact: " + E(f) + "</em>") if f else ""}</dd></div>' for pid, n, l, d, f in m["parts"])
-    rel = "".join(card(BY[r], "../") for r in m["related"])
+    rids = [r for r in m["related"] if r in BY]
+    rids += [x["slug"] for x in MODELS if x["slug"] not in rids and x["slug"] != m["slug"] and x["tag"] == m["tag"]][:3 - len(rids)] if len(rids) < 3 else []
+    rids += [x["slug"] for x in MODELS if x["slug"] not in rids and x["slug"] != m["slug"]][:3 - len(rids)] if len(rids) < 3 else []
+    rel = "".join(card(BY[r], "../") for r in rids)
     axis_seg = lambda: '<div class="seg" role="group" aria-label="Slice axis">' + "".join(f'<button type="button" data-axis="{a}">{a.upper() if a != "off" else "Off"}</button>' for a in ["off", "x", "y", "z"]) + '</div>'
     return f'''<!doctype html><html lang="en"><head>{head(m["title"], m["desc"], url, img, extra="1", jsonld=ld)}
 <link rel="stylesheet" href="../assets/css/site.css"><link rel="preload" as="image" href="../assets/img/{s}-poster.webp" fetchpriority="high">{IMPORTMAP}
@@ -92,22 +96,24 @@ def page(m):
 </body></html>'''
 def home():
     url, img = BASE, BASE + "assets/img/home-og.png"
-    title = "How Things Work: Interactive 3D Cutaways of Machines, Buildings and Nature"
-    desc = "Spin, slice and explode interactive 3D models of a car engine, jet engine, gearbox, 3D printer, skyscraper, bridge, house wall and cat, then play with them."
+    title = "How Things Work: Interactive 3D Cutaways of Tech, Machines, Buildings and Nature"
+    desc = "Spin, slice and explode interactive 3D models of a smartphone, earbuds, CPU, graphics card, car engine, jet engine, skyscraper, bridge and more, then play with them."
     ld = {"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "name": "How Things Work", "url": BASE, "description": desc, "publisher": {"@type": "Organization", "name": "D3DDD", "url": "https://d3ddd.com"}},
           {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "url": BASE + m["slug"] + "/", "name": m["name"]} for i, m in enumerate(MODELS)]}]}
-    order = ["car-engine", "jet-engine", "gearbox", "3d-printer", "house-wall-section", "electric-pickup", "skyscraper", "suspension-bridge", "cat-anatomy", "flying-roadster"]
-    cards = "".join(card(BY[k], feat=k in ("car-engine", "electric-pickup")) for k in order)
-    pl = [("assemble", "Every model", ""), ("quiz", "Every model", ""), ("drive", "Electric pickup", "electric-pickup/?mode=drive"), ("fly", "Flying roadster", "flying-roadster/?mode=fly"), ("run", "Car engine", "car-engine/?mode=run"), ("print", "3D printer", "3d-printer/?mode=print"), ("pet", "Cat", "cat-anatomy/?mode=pet")]
+    order = ["smartphone", "wireless-earbuds", "smartwatch", "laptop", "keyboard-switch", "car-engine", "jet-engine", "cpu", "processor-die", "gpu-card", "electric-pickup", "flying-roadster", "ssd", "gearbox", "3d-printer", "suspension-bridge", "skyscraper", "cat-anatomy", "house-wall-section"]
+    order = [k for k in order if k in BY] + [m["slug"] for m in MODELS if m["slug"] not in order]
+    cards = "".join(card(BY[k], feat=k in ("smartphone", "car-engine", "electric-pickup", "suspension-bridge", "cat-anatomy")) for k in order)
+    pl = [("assemble", "Every model", ""), ("quiz", "Every model", ""), ("drive", "Electric pickup", "electric-pickup/?mode=drive"), ("fly", "Flying roadster", "flying-roadster/?mode=fly"), ("run", "Car engine", "car-engine/?mode=run"), ("print", "3D printer", "3d-printer/?mode=print"), ("pet", "Cat", "cat-anatomy/?mode=pet"), ("water", "Smartphone", "smartphone/?mode=water"), ("zoom", "CPU", "cpu/?mode=zoom"), ("press", "Keyboard switch", "keyboard-switch/?mode=press"), ("load", "Graphics card", "gpu-card/?mode=load"), ("write", "SSD", "ssd/?mode=write"), ("peel", "Earbuds", "wireless-earbuds/?mode=peel")]
+    pl = [x for x in pl if not x[2] or x[2].split("/")[0] in BY]
     pcards = "".join(f'<a class="pcard reveal" href="{h or "jet-engine/?mode=" + k}"><em style="color:#ff453a">{E(w)}</em><b>{E(MODES[k][0])}</b><span>{E(MODES[k][1])}</span></a>' for k, w, h in pl)
     return f'''<!doctype html><html lang="en"><head>{head(title, desc, url, img, jsonld=ld)}
 <link rel="stylesheet" href="assets/css/site.css"><link rel="preload" as="image" href="assets/img/home-poster.webp" fetchpriority="high">{IMPORTMAP}<style>:root{{--accent:#ff453a}} .home .theme{{}}</style><meta name="theme-color" content="#000000"></head><body class="home">
 {nav(dark=True)}
 <main>
-<section class="hero" id="hero"><div class="pin"><img class="hposter" src="assets/img/home-poster.webp" alt="" width="1600" height="800" fetchpriority="high"><canvas id="hc" aria-label="A car engine slowly rotating and coming apart as you scroll"></canvas>
-<div class="copy"><p class="eyebrow" style="color:#ff453a">Interactive 3D · {len(MODELS)} models</p><h1 class="hero-h">How things work.</h1><p class="sub">Spin, slice and explode real machines, buildings and animals. Then play with them.</p><div class="ctas"><a class="btn light" href="#models">Explore the models</a><a class="btn ghost" style="color:#f5f5f7" href="car-engine/?mode=run">Watch it run</a></div></div>
+<section class="hero" id="hero"><div class="pin"><img class="hposter" src="assets/img/home-poster.webp" alt="" width="1600" height="800" fetchpriority="high"><canvas id="hc" aria-label="A smartphone slowly rotating and coming apart as you scroll"></canvas>
+<div class="copy"><p class="eyebrow" style="color:#0a84ff">Interactive 3D · {len(MODELS)} models</p><h1 class="hero-h">How things work.</h1><p class="sub">Spin, slice and explode phones, chips, engines and buildings. Then play with them.</p><div class="ctas"><a class="btn light" href="#models">Explore the models</a><a class="btn ghost" style="color:#f5f5f7" href="smartphone/?mode=peel">Open a phone</a></div></div>
 <p class="h2" id="h2" aria-hidden="true">See how everything works.</p><a class="cue" href="#models">Scroll<i></i></a></div></section>
-<section class="gallery" id="models"><div class="wrap"><p class="eyebrow">The collection</p><h2 class="sec-h">Pick something. Take it apart.</h2><div class="filters" role="group" aria-label="Filter models"><button type="button" class="on" data-f="all">All</button><button type="button" data-f="Machines">Machines</button><button type="button" data-f="Buildings">Buildings</button><button type="button" data-f="Vehicles">Vehicles</button><button type="button" data-f="Nature">Nature</button></div><div class="mgrid" id="mgrid">{cards}</div>
+<section class="gallery" id="models"><div class="wrap"><p class="eyebrow">The collection</p><h2 class="sec-h">Pick something. Take it apart.</h2><div class="filters" role="group" aria-label="Filter models"><button type="button" class="on" data-f="all">All</button><button type="button" data-f="Tech">Tech</button><button type="button" data-f="Machines">Machines</button><button type="button" data-f="Buildings">Buildings</button><button type="button" data-f="Vehicles">Vehicles</button><button type="button" data-f="Nature">Nature</button></div><div class="mgrid" id="mgrid">{cards}</div>
 <div style="margin-top:96px"><p class="eyebrow">Play</p><h2 class="sec-h">Learn by playing.</h2><p class="lede">Timed puzzles, quizzes and a best-time board on your device. Share your score and challenge a friend.</p><div class="play-grid">{pcards}</div></div></div></section>
 {cta()}
 </main>

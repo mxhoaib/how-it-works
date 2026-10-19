@@ -43,7 +43,7 @@ export function build() {
       const walking = P.walk; if (walking) { ph += dt * 7; ang += dt * .45; back = 1; } else if (back > 0) { back = Math.max(0, back - dt * 1.5); ang *= .92; ph *= .9; }
       const sw = walking ? .42 : .42 * back;
       [sLegs, bLegs].forEach(L => L.forEach((p, i) => p.rotation.z = Math.sin(ph + gait[i]) * sw));
-      const Rr = 2.2; root.rotation.y = ang; root.position.set(Rr * Math.sin(ang), walking ? Math.abs(Math.sin(ph)) * .03 : 0, Rr * Math.cos(ang) - Rr);
+      const Rr = .7; root.rotation.y = ang; root.position.set(Rr * Math.sin(ang), walking ? Math.abs(Math.sin(ph)) * .03 : 0, Rr * Math.cos(ang) - Rr);
       const wag = Math.sin(t * (P.purr > 0 ? 5 : 1.6)) * (P.purr > 0 ? .35 : .15); tail.rotation.y = wag; tB.rotation.y = wag;
       head.rotation.z = skull.rotation.z = Math.sin(t * .8) * .04;
       if (P.purr > 0) { P.purr -= dt; const v = Math.sin(t * 160) * .006; sk.children[0].scale.y = .44 + v; } else sk.children[0].scale.y = .44;

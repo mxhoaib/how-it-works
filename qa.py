@@ -17,6 +17,9 @@ async def wire(pg, errs):
     pg.on("requestfailed", lambda r: errs.append("failed: " + r.url))
     pg.on("response", lambda r: errs.append(f"http {r.status}: {r.url}") if r.status >= 400 else None)
     await pg.route("**/gc.zgo.at/**", lambda r: r.fulfill(body="", content_type="text/javascript"))
+async def until(pg, js, t=20000):
+    try: await pg.wait_for_function(js, timeout=t)
+    except Exception: pass
 async def touch(cdp, typ, pts): await cdp.send("Input.dispatchTouchEvent", {"type": typ, "touchPoints": [{"x": x, "y": y} for x, y in pts]})
 async def part_xy(pg, pid):
     return await pg.evaluate("""id => { const a = window.__hiw, p = a.prep.byId[id], v = p.local.clone(); p.obj.localToWorld(v); v.project(a.camera);
@@ -134,7 +137,40 @@ async def model_page(b, m, w, h, mobile):
             if mobile: await pg.touchscreen.tap(cx, cy)
             else: await pg.mouse.click(cx, cy)
             await pg.wait_for_timeout(200); ok(f"{tag} pet purrs", await pg.evaluate("window.__hiw.mdl.params.purr") > 0)
-            await pg.click(".hud [data-a=walk]"); await pg.wait_for_timeout(1500); ok(f"{tag} walk moves cat", await pg.evaluate("window.__hiw.mdl.root.position.length()") > .2)
+            await pg.click(".hud [data-a=walk]"); await until(pg, "window.__hiw.mdl.root.position.length() > .2"); ok(f"{tag} walk moves cat", await pg.evaluate("window.__hiw.mdl.root.position.length()") > .2)
+        elif mode in ("peel", "water", "press", "zoom", "load", "hinge", "write"):
+            hit = (lambda sel: pg.tap(sel)) if mobile else (lambda sel: pg.click(sel))
+            if mode == "peel":
+                for _ in range(3): await hit(".hud [data-a=next]"); await pg.wait_for_timeout(250)
+                await until(pg, "(() => { const a = window.__hiw, p = a.prep.byId[(a.mdl.peel || [])[0]]; return p && p.obj.position.distanceTo(p.home) > a.prep.size * .05; })()")
+                st = await pg.evaluate("(() => { const a = window.__hiw, id = (a.mdl.peel || [])[0], p = a.prep.byId[id]; return [a.G.peel.step(), p ? p.obj.position.distanceTo(p.home) : 0, a.prep.size]; })()")
+                ok(f"{tag} peel removes layers", st[0] == 3 and st[1] > st[2] * .05, f"step {st[0]}, moved {st[1]:.2f}")
+            elif mode == "water":
+                await hit(".hud [data-a=drop]"); await until(pg, "window.__hiw.G.water.count() > 0")
+                n = await pg.evaluate("window.__hiw.G.water.count()"); ok(f"{tag} water drops hit the seals", n > 0, f"{n} drops")
+            elif mode == "press":
+                if mobile:
+                    cdp = await ctx.new_cdp_session(pg); kb = await pg.locator(".hud [data-a=key]").bounding_box(); kx, ky = kb["x"] + kb["width"] / 2, kb["y"] + kb["height"] / 2
+                    await touch(cdp, "touchStart", [(kx, ky)]); await until(pg, "window.__hiw.mdl.actuated()", 8000); act = await pg.evaluate("window.__hiw.mdl.actuated()"); await touch(cdp, "touchEnd", [])
+                else:
+                    await pg.keyboard.down("Space"); await until(pg, "window.__hiw.mdl.actuated()", 8000); act = await pg.evaluate("window.__hiw.mdl.actuated()"); await pg.keyboard.up("Space")
+                await until(pg, "!window.__hiw.mdl.actuated()", 8000); c = await pg.evaluate("window.__hiw.G.press.count()")
+                ok(f"{tag} key press actuates switch", act and c >= 1, f"actuated={act}, count={c}")
+            elif mode == "zoom":
+                for _ in range(3): await hit(".hud [data-a=in]"); await pg.wait_for_timeout(400)
+                await pg.wait_for_timeout(2500); lv = await pg.evaluate("[window.__hiw.G.zoom.level(), window.__hiw.G.zoom.total]")
+                v = variance(await pg.screenshot()); ok(f"{tag} zoom reaches transistor", lv[0] == lv[1] - 1 and v > 8, f"level {lv[0] + 1}/{lv[1]}, stddev={v:.1f}")
+            elif mode == "load":
+                await hit(".hud [data-a=ai]"); await until(pg, "window.__hiw.mdl.params.load > .6"); ld = await pg.evaluate("window.__hiw.mdl.params.load"); ok(f"{tag} load spins up", ld > .6, f"load {ld:.2f}")
+            elif mode == "hinge":
+                await hit(".hud [data-a=close]"); await until(pg, "window.__hiw.G.hinge.angle() < 10"); a1 = await pg.evaluate("window.__hiw.G.hinge.angle()")
+                await hit(".hud [data-a=open]"); await until(pg, "window.__hiw.G.hinge.angle() > 90"); a2 = await pg.evaluate("window.__hiw.G.hinge.angle()")
+                ok(f"{tag} hinge closes and opens", a1 < 10 and a2 > 90, f"{a1:.0f}° then {a2:.0f}°")
+            elif mode == "write":
+                await hit(".hud [data-a=movie]"); await until(pg, "window.__hiw.G.write.count() > 60")
+                st = await pg.evaluate("(() => { const w = window.__hiw.mdl.params.writes; return [window.__hiw.G.write.count(), Math.min(...w), Math.max(...w)]; })()")
+                ok(f"{tag} writes are wear-levelled", st[0] > 60 and st[2] - st[1] <= 1, f"{st[0]} writes, wear {st[1]}-{st[2]}")
+            await pg.screenshot(path=f"{SHOTS}{s}-{w}-{mode}.png")
         if not mobile or mode in ("pet", "run", "print"): await pg.screenshot(path=f"{SHOTS}{s}-{w}-{mode}.png")
         await pg.click(".hud .exit"); await pg.wait_for_timeout(200)
     ok(f"{tag} no console errors / failed requests", not errs, "; ".join(errs[:4]))
@@ -149,6 +185,7 @@ async def home(b, w, h, mobile):
     await pg.evaluate("window.scrollTo(0, innerHeight * .45)"); await pg.wait_for_timeout(900); await pg.screenshot(path=f"{SHOTS}home-{w}-explode.png")
     await pg.evaluate("document.querySelector('#models').scrollIntoView()"); await pg.wait_for_timeout(1200); await pg.screenshot(path=f"{SHOTS}home-{w}-gallery.png")
     await pg.click(".filters [data-f=Vehicles]"); n = await pg.evaluate("[...document.querySelectorAll('.card3')].filter(c => !c.hidden).length"); ok(f"{tag} category filter", n == 2, f"{n} vehicle cards")
+    await pg.click(".filters [data-f=Tech]"); n = await pg.evaluate("[...document.querySelectorAll('.card3')].filter(c => !c.hidden).length"); ok(f"{tag} Tech filter", n == 9, f"{n} tech cards")
     await pg.click(".filters [data-f=all]")
     imgs = await pg.evaluate("Promise.all([...document.images].map(i => (i.loading = 'eager', i.decode().then(() => i.naturalWidth > 0, () => false))))")
     ok(f"{tag} all images load", all(imgs), f"{sum(imgs)}/{len(imgs)}")

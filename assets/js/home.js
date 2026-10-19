@@ -1,4 +1,4 @@
-// Home: black hero with a slowly rotating engine that explodes on scroll; gallery cards turn their model on hover.
+// Home: black hero with a slowly rotating smartphone that explodes on scroll; gallery cards turn their model on hover.
 import * as THREE from 'three';
 import { makeRenderer, setupScene, shadowPlane, prepare, applyExplode, fitCamera, isMobile, reduced } from './core.js';
 const $ = s => document.querySelector(s), hero = $('#hero'), h2 = $('#h2'), copy = $('.hero .copy');
@@ -15,16 +15,16 @@ addEventListener('scroll', onScroll, { passive: true }); onScroll();
 // hero renderer
 (async () => {
   const c = $('#hc'), R = makeRenderer(c), scene = setupScene(R, true), cam = new THREE.PerspectiveCamera(35, 1, .1, 1000);
-  const mdl = (await import('./models/car-engine.js')).build(); scene.add(mdl.root); const prep = prepare(mdl); scene.add(shadowPlane(prep, true));
+  const mdl = (await import('./models/smartphone.js')).build(); mdl.root.rotation.set(1.12, -.35, 0); mdl.root.updateMatrixWorld(true); scene.add(mdl.root); const prep = prepare(mdl); scene.add(shadowPlane(prep, true));
   const size = () => { R.setSize(c.clientWidth, c.clientHeight, false); cam.aspect = c.clientWidth / c.clientHeight; cam.updateProjectionMatrix(); };
   size(); addEventListener('resize', size);
-  const target = fitCamera(cam, prep, [.2, .28, 1], cam.aspect, isMobile ? 1.15 : 1.45);
+  const target = fitCamera(cam, prep, [.2, .28, 1], cam.aspect, isMobile ? 1.0 : 1.05);
   const base = cam.position.clone().sub(target); let ang = 0, vis = true, t = 0, last = performance.now();
   new IntersectionObserver(e => { vis = e[0].isIntersecting; }).observe(hero);
   function loop(now) {
     requestAnimationFrame(loop); if (!vis || document.hidden) { last = now; return; }
     const dt = Math.min(.05, (now - last) / 1000); last = now; t += dt;
-    if (!reduced) { ang += dt * .18; mdl.update(dt, t, mdl.params); }
+    if (!reduced) { ang += dt * .18; mdl.update && mdl.update(dt, t, mdl.params); }
     applyExplode(prep, reduced ? .45 : (1 - Math.pow(1 - p, 2)) * .85);
     const pos = base.clone().applyAxisAngle(new THREE.Vector3(0, 1, 0), ang).multiplyScalar(1 + p * .35);
     cam.position.copy(target).add(pos); cam.lookAt(target); R.render(scene, cam);
