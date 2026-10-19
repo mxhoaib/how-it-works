@@ -27,7 +27,8 @@ def footer(pre=""):
         cols.append(f'<div><h4>{tag}</h4>' + "".join(f'<a href="{pre}{m["slug"]}/">{E(m["name"])}</a>' for m in MODELS if m["tag"] == tag) + '</div>')
     cols.append(f'<div><h4>Project</h4><a href="{pre}">All models</a><a href="{pre}pay/?item=support" rel="nofollow">Support this project</a><a href="https://github.com/mxhoaib/how-it-works/blob/main/CREDITS.md">Credits</a><a href="https://github.com/mxhoaib/how-it-works">Source on GitHub</a></div>')
     cols.append('<div><h4>D3DDD</h4><a href="https://d3ddd.com">d3ddd.com</a><a href="mailto:info@d3ddd.com">info@d3ddd.com</a></div>')
-    return f'''<footer><div class="wrap"><div class="cols">{"".join(cols)}</div><p class="legal">Every model is built from code out of simple shapes: no stock models, no licence fees. Facts are kept to well-established ones. Renders by <a style="display:inline;color:inherit" href="https://d3ddd.com">D3DDD</a>.</p></div></footer>'''
+    badge = f'<a class="made" href="https://d3ddd.com">Made with AI by D3DDD</a>'
+    return f'''{badge}<footer><div class="wrap"><div class="cols">{"".join(cols)}</div><p class="legal">Every model is built from code out of simple shapes: no stock models, no licence fees. Facts are kept to well-established ones. Renders by <a style="display:inline;color:inherit" href="https://d3ddd.com">D3DDD</a>.</p></div></footer>'''
 def cta():
     return '''<section class="cta"><div class="wrap reveal"><p class="eyebrow" style="color:#a1a1a6">D3DDD</p><h2>Need 3D renders or drawings like this?</h2><p>D3DDD makes them: product cutaways, exploded views, architectural renders and technical drawings.</p><div class="row"><a class="btn light" href="mailto:info@d3ddd.com?subject=3D%20renders%20enquiry">Email info@d3ddd.com</a><a class="btn ghost" style="color:#f5f5f7" href="https://d3ddd.com">Visit d3ddd.com</a></div></div></section>'''
 def card(m, pre="", feat=False):
