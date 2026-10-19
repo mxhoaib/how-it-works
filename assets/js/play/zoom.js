@@ -7,11 +7,11 @@ function finfet(THREE) {
   const fins = [-.4, 0, .4].map(z => add(new THREE.BoxGeometry(2.2, .5, .12), M(0x7d8aa8, .35, .3), [0, .25, z]));
   const gate = add(new THREE.BoxGeometry(.36, .75, 1.4), M(0xd8a24a, .3, .85), [0, .38, 0]); // gate wraps three sides of each fin
   add(new THREE.BoxGeometry(.4, .78, 1.42), M(0xff6b6b, .4, 0, { transparent: true, opacity: .35 }), [0, .37, 0]); // high-k dielectric
-  [-.75, .75].forEach(x => { add(new THREE.BoxGeometry(.5, .56, 1.2), M(x < 0 ? 0x5fb37a : 0x5f8ab3, .4, .1), [x, .28, 0]); add(new THREE.BoxGeometry(.2, .6, .2), M(0xb0b6bf, .3, .9), [x, .85, 0]); });
+  [-.75, .75].forEach(x => { add(new THREE.BoxGeometry(.5, .56, 1.2), M(x < 0 ? 0x5fb37a : 0x5f8ab3, .4, .1, { transparent: true, opacity: .5, depthWrite: false }), [x, .28, 0]); add(new THREE.BoxGeometry(.2, .6, .2), M(0xb0b6bf, .3, .9), [x, .85, 0]); });
   add(new THREE.BoxGeometry(.18, .5, .18), M(0xb0b6bf, .3, .9), [0, 1.0, 0]);
   const e = [], eg = new THREE.SphereGeometry(.035, 8, 6), em = new THREE.MeshStandardMaterial({ color: 0x64d2ff, emissive: 0x64d2ff, emissiveIntensity: 2 });
   for (let i = 0; i < 24; i++) { const o = new THREE.Mesh(eg, em); o.userData.z = [-.4, 0, .4][i % 3]; o.userData.u = Math.random(); g.add(o); e.push(o); }
-  g.userData.tick = (t, on) => e.forEach(o => { o.visible = on; o.userData.u = (o.userData.u + .006) % 1; o.position.set(-1.0 + o.userData.u * 2.0, .45, o.userData.z); });
+  g.userData.tick = (t, on) => e.forEach(o => { o.visible = on; o.userData.u = (o.userData.u + .006) % 1; o.position.set(-1.0 + o.userData.u * 2.0, .54, o.userData.z); });
   return g;
 }
 export function start(api, { session, util }) {
