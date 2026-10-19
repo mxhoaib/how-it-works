@@ -45,6 +45,11 @@ export function session(api, mode, opts = {}) {
   if (opts.countdown) S.q('.tm').textContent = fmt(opts.countdown);
   api.hooks.add(tick);
   S.on(hud.querySelector('.exit'), 'click', () => S.exit());
+  if ((mode === 'drive' || mode === 'fly') && typeof MediaRecorder !== 'undefined' && api.canvas.captureStream) {
+    const rb = el('button', 'exit clipbtn'); rb.type = 'button'; rb.textContent = 'Record a clip'; rb.setAttribute('aria-label', 'Record a 6 second clip');
+    hud.querySelector('.exit').before(rb); let busy = false;
+    S.on(rb, 'click', async () => { if (busy) return; busy = true; try { const c = await import('./clip.js'); await c.record(api, rb); } catch (e) { api.toast && api.toast('Recording is not available here'); } busy = false; });
+  }
   S.on(document, 'keydown', e => { if (e.key === 'Escape') S.exit(); });
   return S;
 }

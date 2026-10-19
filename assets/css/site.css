@@ -210,4 +210,6 @@ body.playing .markers{display:none}
 .made:hover{opacity:1}
 .home .made{color:#f5f5f7;background:rgba(28,28,30,.55);border-color:rgba(255,255,255,.14)}
 @media(max-width:600px){.made{right:10px;bottom:calc(10px + env(safe-area-inset-bottom));font-size:11px;padding:5px 10px}}
-.stage.playing ~ .made,.stage.playing + .made,.story:has(.stage.playing) ~ .made{display:none}
+body.playing .made{display:none}
+.hud .clipbtn{background:rgba(255,255,255,.9);color:#1d1d1f;box-shadow:0 8px 30px rgba(0,0,0,.12)}.hud .clipbtn.rec{background:#ff453a;color:#fff}
+@media(max-width:600px){.hud .clipbtn{font-size:13px;padding:0 12px}}

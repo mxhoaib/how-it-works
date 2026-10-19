@@ -3,7 +3,7 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 export const isMobile = matchMedia('(max-width: 767px)').matches;
 export const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 export function makeRenderer(canvas, alpha = false) {
-  const r = new THREE.WebGLRenderer({ canvas, antialias: true, alpha, powerPreference: 'high-performance', preserveDrawingBuffer: false });
+  const r = new THREE.WebGLRenderer({ canvas, antialias: true, alpha, powerPreference: 'high-performance', preserveDrawingBuffer: true });
   r.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   r.toneMapping = THREE.ACESFilmicToneMapping; r.toneMappingExposure = 1;
   r.outputColorSpace = THREE.SRGBColorSpace; r.localClippingEnabled = true;
